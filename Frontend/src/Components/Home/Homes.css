@@ -1,0 +1,27 @@
+.title-button1 {
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  text-align: center;
+  font-family: Arial, Regular;
+  border-radius: 15px;
+  background-image: linear-gradient(to right bottom,
+      #1c6cae,
+      #0c69ba,
+      #1265c5,
+      #295fce,
+      #4258d5);
+  width: max-content;
+  margin-left: 78px;
+  margin-top: 10px;
+}
+
+/* #homepage {
+  background-image: url("../../assets/img/bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+/* 
+img {
+  opacity: 0.5;
+} */

@@ -1,0 +1,94 @@
+.gradient-primary {
+  background-image: linear-gradient(
+    to left bottom,
+    #0d5bad,
+    #1c7bc1,
+    #409bd2,
+    #6abae0,
+    #96d8ef
+  );
+}
+
+.white-text {
+  color: white;
+}
+
+.no-border {
+  border: 0px;
+}
+.neo-card {
+  border-radius: 52px;
+  background: #5d77d5;
+  border: 1px solid transparent;
+  box-shadow: inset -12px -12px 24px #415395, inset 12px 12px 24px #799bff;
+  transform: scale(1);
+  transition: transform 01s;
+}
+.neo-card:hover {
+  transform: scale(1.025);
+  transition: transform 0.5s;
+}
+.dashboard-primary {
+  padding: 5vh;
+  padding-left: 5vh;
+  animation-name: slideinright;
+  animation-duration: 1s;
+}
+
+.Button-pad:hover {
+  background-color: white;
+  border-color: #124191;
+  color: #124191;
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font {
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font:hover {
+  text-decoration: none;
+  color: #124191;
+}
+
+.animation-left {
+  animation-name: slideinleft;
+  animation-duration: 1s;
+}
+
+.animation-right {
+  animation-name: slideinright;
+  animation-duration: 1s;
+}
+
+@keyframes slideinright {
+  0% {
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    left: 100px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes slideinleft {
+  0% {
+    right: 200px;
+    top: 0px;
+  }
+  50% {
+    right: 100px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    top: 0px;
+  }
+}
