@@ -20,11 +20,14 @@ import SweetAlert from "sweetalert2";
 import axios from 'axios';
 
 const thermalstatus = {}
+const thermaltime = {}
 var thermalforms;
-export function Thermal(props) {    
+export function Thermal(props) {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
 
-    const onClick = (form, status, nextPath) => {        
+    const onClick = (form, status, nextPath) => {
         const { state } = props.location
         thermalforms = {
             Station: state.Station,
@@ -44,6 +47,7 @@ export function Thermal(props) {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -56,6 +60,7 @@ export function Thermal(props) {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -67,6 +72,8 @@ export function Thermal(props) {
     )
 }
 export function Thermal2() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -81,6 +88,7 @@ export function Thermal2() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -92,6 +100,7 @@ export function Thermal2() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -103,6 +112,8 @@ export function Thermal2() {
     )
 }
 export function Thermal3() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -117,6 +128,7 @@ export function Thermal3() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -128,6 +140,7 @@ export function Thermal3() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -139,6 +152,8 @@ export function Thermal3() {
     )
 }
 export function Thermal4() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -153,6 +168,7 @@ export function Thermal4() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -164,6 +180,7 @@ export function Thermal4() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -175,6 +192,8 @@ export function Thermal4() {
     )
 }
 export function Thermal5() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -188,6 +207,7 @@ export function Thermal5() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -199,6 +219,7 @@ export function Thermal5() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -210,6 +231,8 @@ export function Thermal5() {
     )
 }
 export function Thermal6() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -223,6 +246,7 @@ export function Thermal6() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -234,6 +258,7 @@ export function Thermal6() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -245,6 +270,8 @@ export function Thermal6() {
     )
 }
 export function Thermal7() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -258,6 +285,7 @@ export function Thermal7() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -269,6 +297,7 @@ export function Thermal7() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -280,6 +309,8 @@ export function Thermal7() {
     )
 }
 export function Thermal8() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -293,6 +324,7 @@ export function Thermal8() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -304,6 +336,7 @@ export function Thermal8() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -315,6 +348,8 @@ export function Thermal8() {
     )
 }
 export function Thermal9() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -328,6 +363,7 @@ export function Thermal9() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -339,6 +375,7 @@ export function Thermal9() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -350,6 +387,8 @@ export function Thermal9() {
     )
 }
 export function Thermal10() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -363,6 +402,7 @@ export function Thermal10() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -374,6 +414,7 @@ export function Thermal10() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -385,6 +426,8 @@ export function Thermal10() {
     )
 }
 export function Thermal11() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -398,6 +441,7 @@ export function Thermal11() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -409,6 +453,7 @@ export function Thermal11() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
+                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -420,6 +465,8 @@ export function Thermal11() {
     )
 }
 export function Thermal12() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -434,6 +481,7 @@ export function Thermal12() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -446,6 +494,7 @@ export function Thermal12() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
+                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -457,6 +506,8 @@ export function Thermal12() {
     )
 }
 export function Thermal13() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -474,7 +525,7 @@ export function Thermal13() {
                 if (description.length === 0) {
                     SweetAlert.fire('Enter description', '', 'error')
                     return false
-                } else {                 
+                } else {
                     thermalstatus["thermal13"] = status
                     const newotastatus = Object.values(thermalstatus)
                     var finalstatus;
@@ -514,10 +565,23 @@ export function Thermal13() {
                         thermal11: thermalstatus.thermal11,
                         thermal12: thermalstatus.thermal12,
                         thermal13: status,
+                        thermaltime1: thermaltime.thermaltime,
+                        thermaltime2: thermaltime.thermal2time,
+                        thermaltime3: thermaltime.thermal3time,
+                        thermaltime4: thermaltime.thermal4time,
+                        thermaltime5: thermaltime.thermal5time,
+                        thermaltime6: thermaltime.thermal6time,
+                        thermaltime7: thermaltime.thermal7time,
+                        thermaltime8: thermaltime.thermal8time,
+                        thermaltime9: thermaltime.thermal9time,
+                        thermaltime10: thermaltime.thermal10time,
+                        thermaltime11: thermaltime.thermal11time,
+                        thermaltime12: thermaltime.thermal12time,
+                        thermaltime13: newtime,
                         description: description,
                         status: finalstatus,
-                        avg:finalavg,
-                        statuslists:statuslists
+                        avg: finalavg,
+                        statuslists: statuslists
                     }
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
                         if (res.data === true) {

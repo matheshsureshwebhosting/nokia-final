@@ -4,8 +4,11 @@ import MasterCheckList from '../../../Pages/MasterCheckList/MasterCheckList'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
 const otastatus = {}
+const otatime = {}
 var otaform;
 function Ota(props) {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         const { state } = props.location
@@ -22,6 +25,7 @@ function Ota(props) {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                        otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -33,6 +37,7 @@ function Ota(props) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                    otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -45,6 +50,8 @@ function Ota(props) {
     )
 }
 function Ota2() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -59,6 +66,7 @@ function Ota2() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                        otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -70,6 +78,7 @@ function Ota2() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                    otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -83,6 +92,8 @@ function Ota2() {
 
 }
 function Ota3() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -97,6 +108,7 @@ function Ota3() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                        otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -108,6 +120,7 @@ function Ota3() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                    otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -119,6 +132,8 @@ function Ota3() {
     )
 }
 function Ota4() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -133,6 +148,7 @@ function Ota4() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -144,6 +160,7 @@ function Ota4() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -156,6 +173,8 @@ function Ota4() {
 
 }
 function Ota5() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -170,6 +189,7 @@ function Ota5() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -181,6 +201,7 @@ function Ota5() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -192,6 +213,8 @@ function Ota5() {
     )
 }
 function Ota6() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -206,6 +229,7 @@ function Ota6() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -217,6 +241,7 @@ function Ota6() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -228,6 +253,8 @@ function Ota6() {
     )
 }
 function Ota7() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -242,6 +269,7 @@ function Ota7() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -253,6 +281,7 @@ function Ota7() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -265,6 +294,8 @@ function Ota7() {
     )
 }
 function Ota8() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -279,6 +310,7 @@ function Ota8() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -290,6 +322,7 @@ function Ota8() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -301,6 +334,8 @@ function Ota8() {
     )
 }
 function Ota9() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -315,6 +350,7 @@ function Ota9() {
                 .then((result) => {
                     if (result.isConfirmed) {
                         otastatus[form] = status
+                         otatime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
@@ -326,6 +362,7 @@ function Ota9() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
+                     otatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -337,6 +374,8 @@ function Ota9() {
     )
 }
 function Ota10() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
@@ -354,7 +393,7 @@ function Ota10() {
                 if (description.length === 0) {
                     SweetAlert.fire('Enter description', '', 'error')
                     return false
-                } else {                    
+                } else {
                     otastatus["ota10"] = status
                     const newotastatus = Object.values(otastatus)
                     var finalstatus;
@@ -391,11 +430,22 @@ function Ota10() {
                         ota8: otastatus.Ota8,
                         ota9: otastatus.Ota9,
                         ota10: status,
+                        Otatime1: otatime.Otatime,
+                        Otatime2: otatime.Ota2time,
+                        Otatime3: otatime.Ota3time,
+                        Otatime4: otatime.Ota4time,
+                        Otatime5: otatime.Ota5time,
+                        Otatime6: otatime.Ota6time,
+                        Otatime7: otatime.Ota7time,
+                        Otatime8: otatime.Ota8time,
+                        Otatime9: otatime.Ota9time,
+                        Otatime10: newtime,
                         description: description,
                         status: finalstatus,
                         avg: finalavg,
-                        statuslists:statuslists
-                    }                    
+                        statuslists: statuslists
+                    }
+                    console.log(datas,otatime)
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/send`, datas).then((res) => {
                         if (res.data === true) {
                             history.push(nextPath)

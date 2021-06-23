@@ -25,6 +25,8 @@ export default class Step9 extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
+        var today = new Date();
+        const newtime = today.getHours() + ":" + today.getMinutes()
         const Displayalert = (name, results) => {
             if (name === "alert")
                 SweetAlert.fire({
@@ -44,7 +46,7 @@ export default class Step9 extends Component {
                                 return false
                             } else {
                                 SweetAlert.fire('Saved!', '', 'success')
-                                const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result } = this.context
+                                const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context
                                 const prosses = {
                                     "step1": prosses1_result,
                                     "step2": prosses2_result,
@@ -54,6 +56,8 @@ export default class Step9 extends Component {
                                     "step6": prosses6_result,
                                     "step7": prosses7_result,
                                     "step8": prosses8_result,
+
+
                                 }
                                 prosses["step9"] = results
                                 const newotastatus = Object.values(prosses)
@@ -90,13 +94,23 @@ export default class Step9 extends Component {
                                     process7_result: prosses.step7,
                                     process8_result: prosses.step8,
                                     process9_result: results,
+                                    process1_time: prosses1_time,
+                                    process2_time: prosses2_time,
+                                    process3_time: prosses3_time,
+                                    process4_time: prosses4_time,
+                                    process5_time: prosses5_time,
+                                    process6_time: prosses6_time,
+                                    process7_time: prosses7_time,
+                                    process8_time: prosses8_time,
+                                    process9_time: newtime,
                                     description: description,
                                     status: finalstatus,
                                     avg: finalavg,
-                                    statuslists:statuslists
-                                }                                
+                                    statuslists: statuslists
+                                }
+                              
                                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
-                                    if (res.data === true) {                                   
+                                    if (res.data === true) {
                                         localStorage.removeItem("step1")
                                         localStorage.removeItem("step2")
                                         localStorage.removeItem("step3")
@@ -104,7 +118,7 @@ export default class Step9 extends Component {
                                         localStorage.removeItem("step5")
                                         localStorage.removeItem("step6")
                                         localStorage.removeItem("step7")
-                                        localStorage.removeItem("step8")                                    
+                                        localStorage.removeItem("step8")
                                     }
                                     this.props.history.push("/")
                                 })
@@ -129,7 +143,7 @@ export default class Step9 extends Component {
                                 return false
                             } else {
                                 SweetAlert.fire('Saved!', '', 'success')
-                                const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result } = this.context
+                                const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context
                                 const prosses = {
                                     "step1": prosses1_result,
                                     "step2": prosses2_result,
@@ -175,11 +189,21 @@ export default class Step9 extends Component {
                                     process7_result: prosses.step7,
                                     process8_result: prosses.step8,
                                     process9_result: results,
+                                    process1_time: prosses1_time,
+                                    process2_time: prosses2_time,
+                                    process3_time: prosses3_time,
+                                    process4_time: prosses4_time,
+                                    process5_time: prosses5_time,
+                                    process6_time: prosses6_time,
+                                    process7_time: prosses7_time,
+                                    process8_time: prosses8_time,
+                                    process9_time: newtime,
                                     description: description,
                                     status: finalstatus,
                                     avg: finalavg,
-                                    statuslists:statuslists
-                                }                                
+                                    statuslists: statuslists
+                                }
+                            
                                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                                     if (res.data === true) {
                                         localStorage.removeItem("step1")

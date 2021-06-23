@@ -18,7 +18,15 @@ export default function SlidercontextProvider(props) {
     const [prosses5_result, setprosses5_result] = useState(null)
     const [prosses6_result, setprosses6_result] = useState(null)
     const [prosses7_result, setprosses7_result] = useState(null)
-    const [prosses8_result, setprosses8_result] = useState(null)    
+    const [prosses8_result, setprosses8_result] = useState(null)
+    const [prosses1_time, setprosses1_time] = useState(null)
+    const [prosses2_time, setprosses2_time] = useState(null)
+    const [prosses3_time, setprosses3_time] = useState(null)
+    const [prosses4_time, setprosses4_time] = useState(null)
+    const [prosses5_time, setprosses5_time] = useState(null)
+    const [prosses6_time, setprosses6_time] = useState(null)
+    const [prosses7_time, setprosses7_time] = useState(null)
+    const [prosses8_time, setprosses8_time] = useState(null)
     function sliderenable(e, step) {
         const active = step.charAt(4)
         seactivestep(active)
@@ -55,26 +63,34 @@ export default function SlidercontextProvider(props) {
             setoperator_name(e.target.value)
         }
     }
-    const updatestaus = (from, status) => {
+    const updatestaus = (from, status, time) => {
         if (from === "prosses1_result") {
             setprosses1_result(status)
+            setprosses1_time(time)
         } else if (from === "prosses2_result") {
             setprosses2_result(status)
+            setprosses2_time(time)
         } else if (from === "prosses3_result") {
             setprosses3_result(status)
+            setprosses3_time(time)
         } else if (from === "prosses4_result") {
             setprosses4_result(status)
+            setprosses4_time(time)
         } else if (from === "prosses5_result") {
             setprosses5_result(status)
+            setprosses5_time(time)
         } else if (from === "prosses6_result") {
             setprosses6_result(status)
+            setprosses6_time(time)
         } else if (from === "prosses7_result") {
             setprosses7_result(status)
+            setprosses7_time(time)
         } if (from === "prosses8_result") {
             setprosses8_result(status)
-        } 
-    }    
-    return (        
+            setprosses8_time(time)
+        }
+    }
+    return (
         <div>
             <Slidercontext.Provider value={{
                 enabled,
@@ -89,13 +105,21 @@ export default function SlidercontextProvider(props) {
                 prosses5_result,
                 prosses6_result,
                 prosses7_result,
-                prosses8_result,                               
+                prosses8_result,
+                prosses1_time,
+                prosses2_time,
+                prosses3_time,
+                prosses4_time,
+                prosses5_time,
+                prosses6_time,
+                prosses7_time,
+                prosses8_time,
                 sliderenable: sliderenable,
                 updateVaccume: updateVaccume,
                 activestep: activestep,
                 vacuume: vacuume,
                 handleChange: handleChange,
-                updatestaus:updatestaus
+                updatestaus: updatestaus
             }}>
                 {props.children}
             </Slidercontext.Provider>

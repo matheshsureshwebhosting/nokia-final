@@ -6,8 +6,8 @@ const util = require("util")
 const removeFile = util.promisify(fs.unlink)
 
 router.post("/send", (req, res) => {
-    const {date,shift,operator_name,ota1,ota2,ota3,ota4,ota5,ota6,ota7,ota8,ota9,ota10,description,status,avg,statuslists} = req.body
-    var sql = `INSERT INTO otatable (date,machine_Sl_No,shift, checked_by, ota1, ota2, ota3, ota4, ota5, ota6, ota7, ota8,ota9,ota10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${shift}','${operator_name}','${ota1}','${ota2}','${ota3}','${ota4}','${ota5}','${ota6}','${ota7}','${ota8}','${ota9}','${ota10}','${description}','${status}','${avg}','${statuslists}')`;
+    const { date, shift, operator_name, ota1, ota2, ota3, ota4, ota5, ota6, ota7, ota8, ota9, ota10, Otatime1, Otatime2, Otatime3, Otatime4, Otatime5, Otatime6, Otatime7, Otatime8, Otatime9, Otatime10, description, status, avg, statuslists } = req.body
+    var sql = `INSERT INTO otatable (date,machine_Sl_No,shift, checked_by, ota1, ota2, ota3, ota4, ota5, ota6, ota7, ota8,ota9,ota10,Otatime1,Otatime2,Otatime3,Otatime4,Otatime5,Otatime6,Otatime7,Otatime8,Otatime9,Otatime10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${shift}','${operator_name}','${ota1}','${ota2}','${ota3}','${ota4}','${ota5}','${ota6}','${ota7}','${ota8}','${ota9}','${ota10}','${Otatime1}','${Otatime2}','${Otatime3}','${Otatime4}','${Otatime5}','${Otatime6}','${Otatime7}','${Otatime8}','${Otatime9}','${Otatime10}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
             console.log(err)
@@ -74,9 +74,9 @@ router.get("/export", async (req, res) => {
                 row.getCell(10).value = data[i].ota7;
                 row.getCell(11).value = data[i].ota8;
                 row.getCell(12).value = data[i].ota9;
-                row.getCell(13).value = data[i].ota10; 
-                row.getCell(14).value = data[i].description;   
-                row.getCell(15).value = data[i].status;                          
+                row.getCell(13).value = data[i].ota10;
+                row.getCell(14).value = data[i].description;
+                row.getCell(15).value = data[i].status;
             }
 
             row.commit();
@@ -85,10 +85,10 @@ router.get("/export", async (req, res) => {
             const base64file = fs.readFileSync(path, { encoding: 'base64' })
             const contentType = "data:@file/octet-stream;base64,"
             const url = await `http://localhost:${4000}/${path}`
-            return {url:url,filepath:path}
+            return { url: url, filepath: path }
         })
     res.send(url.url)
-    setTimeout(async()=>{ await removeFile(`${url.filepath}`)},2000)
+    setTimeout(async () => { await removeFile(`${url.filepath}`) }, 2000)
 })
 
 router.get("/*", (req, res) => {

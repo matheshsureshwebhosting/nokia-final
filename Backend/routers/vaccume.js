@@ -16,8 +16,8 @@ router.get("/", (req, res) => {
 })
 
 router.post("/send", (req, res) => {
-    const { date, shift, machine_Sl_No, checked_by, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, description,status,avg,statuslists} = req.body
-    var sql = `INSERT INTO vaccumetable (date,shift,machine_Sl_No,checked_by, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result,description,status,average,statuslists) VALUES ('${date}','${shift}','${machine_Sl_No}','${checked_by}','${process1_result}','${process2_result}','${process3_result}','${process4_result}','${process5_result}','${process6_result}','${process7_result}','${process8_result}','${process9_result}','${description}','${status}','${avg}','${statuslists}')`;
+    const { date, shift, machine_Sl_No, checked_by, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time, description, status, avg, statuslists } = req.body
+    var sql = `INSERT INTO vaccumetable (date,shift,machine_Sl_No,checked_by, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result,process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time,description,status,average,statuslists) VALUES ('${date}','${shift}','${machine_Sl_No}','${checked_by}','${process1_result}','${process2_result}','${process3_result}','${process4_result}','${process5_result}','${process6_result}','${process7_result}','${process8_result}','${process9_result}','${process1_time}','${process2_time}','${process3_time}','${process4_time}','${process5_time}','${process6_time}','${process7_time}','${process8_time}','${process9_time}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
             return res.send(false)
@@ -84,10 +84,10 @@ router.get("/export", async (req, res) => {
             const base64file = fs.readFileSync(path, { encoding: 'base64' })
             const contentType = "data:@file/octet-stream;base64,"
             const url = await `http://localhost:${4000}/${path}`
-            return {url:url,filepath:path}
+            return { url: url, filepath: path }
         })
     res.send(url.url)
-    setTimeout(async()=>{ await removeFile(`${url.filepath}`)},2000)
+    setTimeout(async () => { await removeFile(`${url.filepath}`) }, 2000)
 })
 
 router.get("/*", (req, res) => {

@@ -4,8 +4,11 @@ import { useHistory } from 'react-router'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
 const uwastatus = {}
+const uwatime = {}
 var uwaform;
 function Uwa(props) {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         const { state } = props.location
@@ -21,6 +24,7 @@ function Uwa(props) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -33,6 +37,7 @@ function Uwa(props) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -45,6 +50,8 @@ function Uwa(props) {
     )
 }
 function Uwa2() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -58,6 +65,7 @@ function Uwa2() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -69,6 +77,7 @@ function Uwa2() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -82,6 +91,8 @@ function Uwa2() {
 
 }
 function Uwa3() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -95,6 +106,7 @@ function Uwa3() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -106,6 +118,7 @@ function Uwa3() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -119,6 +132,8 @@ function Uwa3() {
     )
 }
 function Uwa4() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -132,6 +147,7 @@ function Uwa4() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -143,6 +159,7 @@ function Uwa4() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -156,6 +173,8 @@ function Uwa4() {
 
 }
 function Uwa5() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -169,6 +188,7 @@ function Uwa5() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -180,6 +200,7 @@ function Uwa5() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -192,6 +213,8 @@ function Uwa5() {
     )
 }
 function Uwa6() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -205,6 +228,7 @@ function Uwa6() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -216,6 +240,7 @@ function Uwa6() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -227,6 +252,8 @@ function Uwa6() {
     )
 }
 function Uwa7() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -240,6 +267,7 @@ function Uwa7() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -251,6 +279,7 @@ function Uwa7() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -263,6 +292,8 @@ function Uwa7() {
     )
 }
 function Uwa8() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -276,6 +307,7 @@ function Uwa8() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -287,6 +319,7 @@ function Uwa8() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -298,6 +331,8 @@ function Uwa8() {
     )
 }
 function Uwa9() {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -311,6 +346,7 @@ function Uwa9() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -322,6 +358,7 @@ function Uwa9() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     uwastatus[form] = status
+                    uwatime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
@@ -333,6 +370,8 @@ function Uwa9() {
     )
 }
 function Uwa10(props) {
+    var today = new Date();
+    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
     const onClick = (form, status, nextPath) => {
         if (uwaform === undefined) {
@@ -387,11 +426,21 @@ function Uwa10(props) {
                         uwa8: uwastatus.Uwa8,
                         uwa9: uwastatus.Uwa9,
                         uwa10: status,
+                        uwatime1: uwatime.Uwatime,
+                        uwatime2: uwatime.Uwa2time,
+                        uwatime3: uwatime.Uwa3time,
+                        uwatime4: uwatime.Uwa4time,
+                        uwatime5: uwatime.Uwa5time,
+                        uwatime6: uwatime.Uwa6time,
+                        uwatime7: uwatime.Uwa7time,
+                        uwatime8: uwatime.Uwa8time,
+                        uwatime9: uwatime.Uwa9time,
+                        uwatime10: newtime,
                         description: description,
                         status: finalstatus,
                         avg: finalavg,
                         statuslists: statuslists
-                    }                    
+                    }
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/uwa/send`, datas).then((res) => {
                         if (res.data === true) {
                             history.push(nextPath)

@@ -40,7 +40,9 @@ export default class Step1 extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    render() {    
+    render() {   
+        var today = new Date();
+        const newtime = today.getHours() + ":" + today.getMinutes() 
         const { sliderenable } = this.context
         const Displayalert = (name, results) => {            
             if (name === "alertSuccess")
@@ -49,9 +51,10 @@ export default class Step1 extends Component {
                     text: "Thank You!",
                     icon: "success",
                 }).then((result) => {                
-                    if (result.isConfirmed) {                   
+                    if (result.isConfirmed) {            
+                               
                         const { updatestaus } = this.context
-                        updatestaus("prosses1_result", results)
+                        updatestaus("prosses1_result", results,newtime)
                         localStorage.setItem("step1", "okay")
                         sliderenable(this, "step2")
                         this.props.history.push("/step2")
@@ -65,7 +68,7 @@ export default class Step1 extends Component {
                 }).then((result) => {                
                 if (result.isConfirmed) {                   
                     const { updatestaus } = this.context
-                    updatestaus("prosses1_result", results)
+                    updatestaus("prosses1_result", results,newtime)
                     localStorage.setItem("step1", "okay")
                     sliderenable(this, "step2")
                     this.props.history.push("/step2")
