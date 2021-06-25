@@ -3,6 +3,7 @@ import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Redirect } from 'react-router'
 import formImg from '../../../assets/img/formImg.gif'
 import SubmitButton from '../../Utilities/Buttons/SubmitButton'
+import { Navbar } from '../../Navbar/Navbar'
 export class Testerform extends Component {
     constructor(props) {
         super()
@@ -65,8 +66,8 @@ export class Testerform extends Component {
         if (istesterform === true) {
             return <Redirect to={
                 {
-                    pathname:"/UWA",
-                    state:this.state
+                    pathname: "/UWA",
+                    state: this.state
                 }
             } />
         }
@@ -87,13 +88,15 @@ export class Testerform extends Component {
         const nameClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "100vh", width: "100%" }}>
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="UWA Tester Form" />
+
+                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "90vh", width: "100%" }}>
                     <div className='d-flex justify-content-center h-75 w-75'>
                         <div className='h-100 w-50 '>
                             <img src={formImg} alt='formImg' className='h-100 w-100' />
                         </div>
                         <div data-aos="flip-left" data-aos-duration='3000' className='d-flex flex-column justify-content-center align-items-center h-100 w-50 glassCard bg-light' style={{ borderRadius: "0px" }}>
-                            <h3 className='text-center pb-4 '>Tester</h3>
+                            <h3 className='text-center pb-4 '>UWA Tester</h3>
                             <div>
                                 <Form >
                                     <Form.Group className='d-sm-flex'>
@@ -107,7 +110,7 @@ export class Testerform extends Component {
                                     >
                                         <div>
                                             <Form.Group controlId="exampleForm.ControlSelect1" className=' d-sm-flex'>
-                                                <Form.Label className=' input-label w-50 input-label pt-1'> Station Serial No</Form.Label>
+                                                <Form.Label className=' input-label w-50 input-label pt-1'> Station Serial No / Scan</Form.Label>
                                                 <Form.Control autoFocus type='text' className={stationClass} name="Station" onChange={(e) => this.handlechange(e)}>
                                                 </Form.Control>
                                             </Form.Group>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap"
-import {withRouter} from "react-router-dom"
 import './sol.css'
 import SweetAlert from "sweetalert2";
 import axios from 'axios'
@@ -9,7 +8,7 @@ import solder2 from '../../assets/videos/soldering/s2.mp4'
 import solder3 from '../../assets/videos/soldering/s3.mp4'
 import SubmitButton from '../Utilities/Buttons/SubmitButton';
 import TitleButton from '../Utilities/Buttons/TitleButton';
-class Solderings extends Component {
+export default class Solderings extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,7 +22,14 @@ class Solderings extends Component {
             initialStep: 0,
             showStepNumbers: true,
             modalShow: false,
+            counterTime: 0
         }
+    }
+    componentDidMount = () => {
+        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
+    }
+    componentWillUnmount = () => {
+        clearInterval(this.interval);
     }
     // ---------------------soldering tooltip select state-------------//
     _sttc117 = () => {
@@ -124,7 +130,7 @@ class Solderings extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitbtn = (e, status) => {
-        const { solder_model, temp } = this.state
+        const { solder_model, temp,counterTime } = this.state
         SweetAlert.fire({
             title: 'Provide Following Details',
             html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks... if you changed the cartridge please leave the message'></textarea>",
@@ -148,13 +154,15 @@ class Solderings extends Component {
                         temperature: temp,
                         checked_by: Solderform.operator_name,
                         status: "Complete",
-                        description: description
+                        description: description,
+                        time:counterTime
                     }
+                    console.log(datas)
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering/send`, datas).then((res) => {
                         SweetAlert.fire('Saved!', '', 'success').then((result) => {
                             if (result.isConfirmed) {
-                                this.props.history.push("/")
                             }
+                            window.location.replace("/")
                         })
                     })
                 }
@@ -163,17 +171,19 @@ class Solderings extends Component {
             }
         })
     }
+
+
     //---------------- Temperature counter functions--------------------//
     increment = () => {
         const { temp, tempValid } = this.state
         const tempA = tempValid + 9;
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp + 1 });
-        if (temp <= tempA && temp >= tempB) {                        
+        if (temp <= tempA && temp >= tempB) {
             this.setState({ error: false, error2: false });
         }
         else {
-            this.setState({ error: true, modalShow: true });            
+            this.setState({ error: true, modalShow: true });
         }
     }
     decrement = () => {
@@ -181,22 +191,24 @@ class Solderings extends Component {
         const tempA = tempValid + 9;
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp - 1 });
-        if (temp <= tempA && temp >= tempB) {                        
+        if (temp <= tempA && temp >= tempB) {
             this.setState({ error: false, error2: false });
         }
         else {
-            this.setState({ error: true, modalShow: true });            
+            this.setState({ error: true, modalShow: true });
         }
+
     }
 
     render() {
+        // Button Status Switcher
+        const buttonStatus = this.state.counterTime > 5 ? false : true;
         const { temp } = this.state
         const radiobtn = {
             width: "20px",
             marginTop: "10px",
             height: "20px"
         }
-
         //-----------------tooltips-----------------//
         const sol1 = (props) => (
             <Tooltip id="button-tooltip" {...props}>
@@ -305,7 +317,7 @@ class Solderings extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter" className='text-center'>
                             Your Measured ToolTip Temperature Is Wrong
-                  </Modal.Title>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h5 className='text-center text-danger'>Please Redo the Process Or Change The Cartridge</h5>
@@ -331,6 +343,20 @@ class Solderings extends Component {
                     show={this.state.modalShow}
                     onHide={hide}
                 />
+                <div className='testing-user-detail'>
+                    <div className='d-flex '>
+                        <div className="data-title">Operator Name :</div>
+                        <div className="data-text text-right pl-5">{this.props.Solderform.operator_name}</div>
+                    </div>
+                    <div className='d-flex'>
+                        <div className="data-title ">Machine Serial Number :</div>
+                        <div className="data-text text-right pl-2">{this.props.Solderform.Station}</div>
+                    </div>
+                    <div className='d-flex'>
+                        <div className='data-title'>Time :</div>
+                        <div className='data-text'>{this.state.counterTime}Sec</div>
+                    </div>
+                </div>
                 <div className='d-flex flex-column justify-content-center bg-primary' style={{ height: "100vh" }}>
                     <div className="ml-3"><TitleButton>Soldering ToolTip Temperature</TitleButton></div>
                     <div className='d-md-flex justify-content-center'>
@@ -470,7 +496,17 @@ class Solderings extends Component {
                                     </div>
                                     {/* -----------Submit Buttons----------- */}
                                     <div className='d-flex justify-content-center py-3 '>
-                                        <SubmitButton onClick={(e) => this.submitbtn(e, "Yes")} className='solderalert white soldering-submit-btn value={yes}' buttonName="Submit" />
+                                        <OverlayTrigger
+                                            key="top"
+                                            top="top"
+                                            overlay={
+                                                <Tooltip id={`tooltip-top`} >
+                                                    <div className='disable-btn-tooltip'>You Have To Spend Minimum <br />25seconds For Checking</div>
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <SubmitButton disabled={buttonStatus} onClick={(e) => this.submitbtn(e, "Yes")} className='solderalert white soldering-submit-btn value={yes}' buttonName="Submit" />
+                                        </OverlayTrigger>
                                     </div>
                                 </div>
                             </div>
@@ -484,5 +520,3 @@ class Solderings extends Component {
         this.setState(() => ({ stepsEnabled: false }));
     };
 }
-
-export default withRouter(Solderings)

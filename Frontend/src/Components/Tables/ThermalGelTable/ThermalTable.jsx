@@ -93,7 +93,7 @@ export default class ThermalTable extends Component {
         return (
             <>
                 <div className='p-3 container-fluid'>
-                    <h3 className='text-center mb-4 text-dark' style={{ marginBottom: "10px !important" }}>Thermal Checklist </h3>
+                    <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Thermal Checklist </h3>
 
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
@@ -146,7 +146,6 @@ export default class ThermalTable extends Component {
                                 <th>Checked by</th>
                                 <th>Remarks</th>
                                 <th>Status</th>
-                                <th>Average</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,7 +170,6 @@ export default class ThermalTable extends Component {
                                         <td>{thermalinfo.checked_by}</td>
                                         <td>{thermalinfo.description}</td>
                                         <td>{thermalinfo.status}</td>
-                                        <td>{thermalinfo.average}</td>
                                     </tr>
                                 ))
                             }

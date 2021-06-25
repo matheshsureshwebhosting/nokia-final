@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import formImg from '../../assets/img/formImg.gif'
+import { Navbar } from '../Navbar/Navbar'
 import SubmitButton from '../Utilities/Buttons/SubmitButton'
 import Solderings from "./Solderings"
 export class SolderForm extends Component {
@@ -62,8 +63,8 @@ export class SolderForm extends Component {
 
     render() {
         const { shift, date, nameError, stationError, issoldering } = this.state
-        if (issoldering ===true) {
-           return <Solderings Solderform={this.state} />
+        if (issoldering === true) {
+            return <Solderings Solderform={this.state} />
         }
         //ToolTips 
         const serialTooltip = (props) => (
@@ -82,7 +83,9 @@ export class SolderForm extends Component {
         const nameClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "100vh", width: "100%" }}>
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Soldering Tip Temperature Form" />
+
+                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "90vh", width: "100%" }}>
                     <div className='d-flex justify-content-center h-75 w-75'>
                         <div className='h-100 w-50 '>
                             <img src={formImg} alt='formImg' className='h-100 w-100' />
@@ -102,7 +105,7 @@ export class SolderForm extends Component {
                                     >
                                         <div>
                                             <Form.Group controlId="exampleForm.ControlSelect1" className=' d-sm-flex'>
-                                                <Form.Label className=' input-label w-50 input-label pt-1'> Station Serial No</Form.Label>
+                                                <Form.Label className=' input-label w-50 input-label pt-1'> Station Serial No / Scan</Form.Label>
                                                 <Form.Control autoFocus type='text' className={stationClass} name="Station" onChange={(e) => this.handlechange(e)}>
                                                 </Form.Control>
                                             </Form.Group>
@@ -141,4 +144,3 @@ export class SolderForm extends Component {
 }
 
 export default SolderForm
-

@@ -3,7 +3,7 @@ const db = require("../database/mySql")
 
 vaccumetable = async () => {
     const vaccumetable = new Promise(async (resolve, reject) => {
-        var sql = "CREATE TABLE vaccumetable (date VARCHAR(255),shift VARCHAR(255),machine_Sl_No VARCHAR(255),checked_by VARCHAR(255), process1_result VARCHAR(255), process2_result VARCHAR(255), process3_result VARCHAR(255), process4_result VARCHAR(255), process5_result VARCHAR(255), process6_result VARCHAR(255), process7_result VARCHAR(255), process8_result VARCHAR(255), process9_result VARCHAR(255),process1_time VARCHAR(255), process2_time VARCHAR(255), process3_time VARCHAR(255), process4_time VARCHAR(255), process5_time VARCHAR(255), process6_time VARCHAR(255), process7_time VARCHAR(255), process8_time VARCHAR(255), process9_time VARCHAR(255),description VARCHAR(255),status VARCHAR(255),average VARCHAR(255),statuslists VARCHAR(255))";
+        var sql = "CREATE TABLE vaccumetable (date VARCHAR(255),shift VARCHAR(255),machine_Sl_No VARCHAR(255),checked_by VARCHAR(255),pressure_guage_value VARCHAR(255), process1_result VARCHAR(255), process2_result VARCHAR(255), process3_result VARCHAR(255), process4_result VARCHAR(255), process5_result VARCHAR(255), process6_result VARCHAR(255), process7_result VARCHAR(255), process8_result VARCHAR(255), process9_result VARCHAR(255),process1_time VARCHAR(255), process2_time VARCHAR(255), process3_time VARCHAR(255), process4_time VARCHAR(255), process5_time VARCHAR(255), process6_time VARCHAR(255), process7_time VARCHAR(255), process8_time VARCHAR(255), process9_time VARCHAR(255),description VARCHAR(255),status VARCHAR(255),average VARCHAR(255),statuslists VARCHAR(255))";
         await db.query(sql, function (err, result) {
             if (err) {
                 return resolve(err.sqlMessage)
@@ -18,7 +18,7 @@ vaccumetable = async () => {
 
 solderingtable = async () => {
     const solderingtable = new Promise(async (resolve, reject) => {
-        var sql = "CREATE TABLE solderingtable (date VARCHAR(255),shift VARCHAR(255),machine_Sl_No VARCHAR(255),station VARCHAR(255),catridge_used VARCHAR(255),temperature VARCHAR(255),checked_by VARCHAR(255),description VARCHAR(255),status VARCHAR(255))";
+        var sql = "CREATE TABLE solderingtable (date VARCHAR(255),time VARCHAR(255),shift VARCHAR(255),machine_Sl_No VARCHAR(255),station VARCHAR(255),catridge_used VARCHAR(255),temperature VARCHAR(255),checked_by VARCHAR(255),description VARCHAR(255),status VARCHAR(255))";
         await db.query(sql, function (err, result) {
             if (err) {
                 return resolve(err.sqlMessage)

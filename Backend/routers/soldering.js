@@ -6,8 +6,8 @@ const util = require("util")
 const removeFile = util.promisify(fs.unlink)
 
 router.post("/send", (req, res) => {
-    const { date, shift, machine_Sl_No, station, catridge_used, temperature, checked_by, status,description } = req.body
-    var sql = `INSERT INTO solderingtable (date,shift,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${shift}','not provide','${station}','${catridge_used}','${temperature}','${checked_by}','${description}','${status}')`;
+    const { date,time, shift, machine_Sl_No, station, catridge_used, temperature, checked_by, status,description } = req.body
+    var sql = `INSERT INTO solderingtable (date,time,shift,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${time}','${shift}','not provide','${station}','${catridge_used}','${temperature}','${checked_by}','${description}','${status}')`;
     db.query(sql, function (err, result) {
         if (err) {
             return res.send(err)

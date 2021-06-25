@@ -3,6 +3,7 @@ import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import formImg from '../../assets/img/formImg.gif'
 import Testers from '../../Pages/TestersMainPage/Testers'
 import SubmitButton from '../Utilities/Buttons/SubmitButton'
+import { Navbar } from '../Navbar/Navbar'
 export class Testerform extends Component {
     constructor(props) {
         super()
@@ -82,7 +83,9 @@ export class Testerform extends Component {
         const nameClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "100vh", width: "100%" }}>
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Autonomous Maintenance" />
+
+                <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "90vh", width: "100%" }}>
                     <div className='d-flex justify-content-center h-75 w-75'>
                         <div className='h-100 w-50 '>
                             <img src={formImg} alt='formImg' className='h-100 w-100' />

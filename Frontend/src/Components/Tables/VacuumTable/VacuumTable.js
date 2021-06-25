@@ -97,7 +97,7 @@ export default class VacuumTable extends Component {
             <div>
                 <>
                     <div className='p-3'>
-                        <h3 className='text-center mb-4 text-dark'>Vacuum Lifter Maintenance</h3>
+                        <h3 className='text-center mb-4'>Vacuum Lifter Maintenance</h3>
                         <div className="d-flex justify-content-between my-3">
                             <div className='d-flex'>
                                 <div className="mt-1">
@@ -137,8 +137,7 @@ export default class VacuumTable extends Component {
                                     <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
                                     <th className="tg-54sw text-center " colSpan="18">Status</th>
                                     <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
-                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
-                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Average</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">status</th>
                                 </tr>
                                 <tr>
                                     <td className="tg-54sw text-center" colSpan="2">Process1</td>
@@ -200,7 +199,6 @@ export default class VacuumTable extends Component {
                                             <td className="tg-7zrl" colSpan="2">{vaccume.process9_result} </td>
                                             <td className="tg-7zrl">{vaccume.description}</td>
                                             <td className="tg-7zrl">{vaccume.status}</td>
-                                            <td className="tg-7zrl">{vaccume.average}</td>
                                         </tr>
                                     )) : null
                                 }

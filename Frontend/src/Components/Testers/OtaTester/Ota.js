@@ -1,382 +1,588 @@
-import React from 'react'
-import { useHistory } from 'react-router'
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory,Redirect } from 'react-router'
 import MasterCheckList from '../../../Pages/MasterCheckList/MasterCheckList'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
 const otastatus = {}
 const otatime = {}
 var otaform;
+// const testerName = localStorage.getItem("testerName")
+// const stationId = localStorage.getItem("stationId")
 function Ota(props) {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         const { state } = props.location
         otaform = state
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                        otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                    otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
-
     }
     return (
+
         <>
-            <MasterCheckList bar="0%" TypeOfMedia="Video" videosrc="./Images/OTA/1.mp4" onClick={onClick} alt="Ota" buttonName="Next" link="/Ota2" />
-        </>
+            <MasterCheckList
+                disabled={buttonStatus} TimeCounter={timer} progressCircle="true"
+                count="10" progressValue="10" progressText="1 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/1.mp4" onClick={onClick} alt="Ota"
+                uttonName="Next" link="/Ota2" />
+        </ >
     )
 }
 function Ota2() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                        otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        console.log(otaform)
+
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                    otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {        
+        return <Redirect to="/otaform" />
+    }
     return (
-
         <>
-            <MasterCheckList bar="10%" TypeOfMedia="Video" videosrc="./Images/OTA/2.mp4" onClick={onClick} alt="Ota2" buttonName="Next" link="/Ota3" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressText="2 of 10" progressValue="20"
+                TypeOfMedia="Video" videosrc="./Images/OTA/2.mp4" onClick={onClick} alt="Ota2" buttonName="Next" link="/Ota3" />
         </>
     )
 
 }
 function Ota3() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                        otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                    otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="20%" TypeOfMedia="Video" videosrc="./Images/OTA/3.mp4" onClick={onClick} alt="Ota3" buttonName="Next" link="/Ota4" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="30" progressText="3 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/3.mp4" onClick={onClick} alt="Ota3" buttonName="Next" link="/Ota4" />
         </>
     )
 }
 function Ota4() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="30%" TypeOfMedia="Video" videosrc="./Images/OTA/4.mp4" onClick={onClick} alt="Ota4" buttonName="Next" link="/Ota5" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="40" progressText="4 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/4.mp4" onClick={onClick} alt="Ota4" buttonName="Next" link="/Ota5" />
         </>
     )
 
 }
 function Ota5() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="40%" TypeOfMedia="Video" videosrc="./Images/OTA/5.mp4" onClick={onClick} alt="Ota5" buttonName="Next" link="/Ota6" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station} count="10"
+                progressValue="50" progressText="5 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/5.mp4" onClick={onClick} alt="Ota5" buttonName="Next" link="/Ota6" />
         </>
     )
 }
 function Ota6() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="50%" TypeOfMedia="Video" videosrc="./Images/OTA/6.mp4" onClick={onClick} alt="Ota6" buttonName="Next" link="/Ota7" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="60" progressText="6 0f 10"
+                TypeOfMedia="Video" videosrc="./Images/OTA/6.mp4" onClick={onClick}
+                alt="Ota6" buttonName="Next" link="/Ota7" />
         </>
     )
 }
 function Ota7() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
+    }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
     }
     return (
 
         <>
-            <MasterCheckList bar="60%" TypeOfMedia="Video" videosrc="./Images/OTA/7.mp4" onClick={onClick} alt="Ota7" buttonName="Next" link="/Ota8" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="70" progressText="7 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/7.mp4" onClick={onClick} alt="Ota7" buttonName="Next" link="/Ota8" />
         </>
     )
 }
 function Ota8() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="70%" TypeOfMedia="Video" videosrc="./Images/OTA/8.mp4" onClick={onClick} alt="Ota8" buttonName="Next" link="/Ota9" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="80" progressText="8 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/8.mp4" onClick={onClick} alt="Ota8" buttonName="Next" link="/Ota9" />
         </>
     )
 }
 function Ota9() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
         }
-        if (status === "Yes")
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        otastatus[form] = status
-                         otatime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === "Yes")
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        //         .then((result) => {
+        if (status === "Yes") {
+            otastatus[form] = status
+            otatime[`${form}time`] = timer
+            history.push(nextPath)
+        }
+        // })
         if (status === "No")
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     otastatus[form] = status
-                     otatime[`${form}time`] = newtime
+                    otatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
         <>
-            <MasterCheckList bar="80%" TypeOfMedia="Video" videosrc="./Images/OTA/9.mp4" onClick={onClick} alt="Ota9" buttonName="Next" link="/Ota10" />
+            <MasterCheckList progressCircle="true" disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="90" progressText="9 0f 10" TypeOfMedia="Video"
+                videosrc="./Images/OTA/9.mp4" onClick={onClick} alt="Ota9" buttonName="Next" link="/Ota10" />
         </>
     )
 }
 function Ota10() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (otaform === undefined) {
             return history.push("/otaform")
@@ -439,13 +645,12 @@ function Ota10() {
                         Otatime7: otatime.Ota7time,
                         Otatime8: otatime.Ota8time,
                         Otatime9: otatime.Ota9time,
-                        Otatime10: newtime,
+                        Otatime10: timer,
                         description: description,
                         status: finalstatus,
                         avg: finalavg,
                         statuslists: statuslists
-                    }
-                    console.log(datas,otatime)
+                    }                    
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/send`, datas).then((res) => {
                         if (res.data === true) {
                             history.push(nextPath)
@@ -453,15 +658,31 @@ function Ota10() {
                     }).catch((error) => {
                         console.log(error)
                     })
-
                 }
             }
         })
     }
+    // useEffect(() => {
+    //     return () => {
+    //         localStorage.removeItem("data.operator_name")
+    //         localStorage.removeItem("stationId")
+    //     }
+    // }, [])
+    const data = otaform
+    if (otaform === undefined) {
+        return <Redirect to="/otaform" />
+    }
     return (
 
         <>
-            <MasterCheckList bar="90%" okToComplete="true" TypeOfMedia="Video" videosrc="./Images/OTA/10.mp4" onClick={onClick} alt="Ota10" buttonName="Done" link="/" />
+            <MasterCheckList
+                progressCircle="true"
+                disabled={buttonStatus}
+                TimeCounter={timer} name={data.operator_name} machineID={data.Station}
+                count="10" progressValue="100" progressText="10 0f 10"
+                okToComplete="true" TypeOfMedia="Video"
+                videosrc="./Images/OTA/10.mp4" onClick={onClick}
+                alt="Ota10" buttonName="Done" link="/" />
         </>
     )
 }

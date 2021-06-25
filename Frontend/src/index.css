@@ -86,6 +86,9 @@ code {
 .white {
   color: #fff;
 }
+.blue {
+  color: #124191;
+}
 .bg-green {
   background-color: #33cc33;
 }
@@ -149,8 +152,8 @@ code {
   );
 }
 .grid-card {
-  width: 300px;
-  height: 200px;
+  width: 350px;
+  height: 300px;
   border-radius: 75px;
 }
 .bg-card {

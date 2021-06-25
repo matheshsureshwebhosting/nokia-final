@@ -18,7 +18,7 @@ export default function SlidercontextProvider(props) {
     const [prosses5_result, setprosses5_result] = useState(null)
     const [prosses6_result, setprosses6_result] = useState(null)
     const [prosses7_result, setprosses7_result] = useState(null)
-    const [prosses8_result, setprosses8_result] = useState(null)
+    const [prosses8_result, setprosses8_result] = useState(null)    
     const [prosses1_time, setprosses1_time] = useState(null)
     const [prosses2_time, setprosses2_time] = useState(null)
     const [prosses3_time, setprosses3_time] = useState(null)
@@ -89,8 +89,8 @@ export default function SlidercontextProvider(props) {
             setprosses8_result(status)
             setprosses8_time(time)
         }
-    }
-    return (
+    }  
+    return (        
         <div>
             <Slidercontext.Provider value={{
                 enabled,
@@ -105,7 +105,7 @@ export default function SlidercontextProvider(props) {
                 prosses5_result,
                 prosses6_result,
                 prosses7_result,
-                prosses8_result,
+                prosses8_result,      
                 prosses1_time,
                 prosses2_time,
                 prosses3_time,
@@ -113,13 +113,13 @@ export default function SlidercontextProvider(props) {
                 prosses5_time,
                 prosses6_time,
                 prosses7_time,
-                prosses8_time,
+                prosses8_time,                         
                 sliderenable: sliderenable,
                 updateVaccume: updateVaccume,
                 activestep: activestep,
                 vacuume: vacuume,
                 handleChange: handleChange,
-                updatestaus: updatestaus
+                updatestaus:updatestaus
             }}>
                 {props.children}
             </Slidercontext.Provider>

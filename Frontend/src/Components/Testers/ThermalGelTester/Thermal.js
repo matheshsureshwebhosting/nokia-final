@@ -1,31 +1,47 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MasterCheckList from '../../../Pages/MasterCheckList/MasterCheckList'
-import video1 from '../../../assets/videos/PVA/PVA 1_4_1_1.mp4'
-import video2 from '../../../assets/videos/PVA/PVA 2_3_1.mp4'
-import video3 from '../../../assets/videos/PVA/PVA 3_4_1.mp4'
-import video4 from '../../../assets/videos/PVA/PVA 4_2_1.mp4'
-import video5 from '../../../assets/videos/PVA/PVA 5_2_1.mp4'
-import video6 from '../../../assets/videos/PVA/PVA 6_2_1.mp4'
-import video7 from '../../../assets/videos/PVA/PVA 7_3_1.mp4'
-import video8 from '../../../assets/videos/PVA/PVA 8_3_1.mp4'
-import video9 from '../../../assets/videos/PVA/PVA 9_4_1.mp4'
-import video10 from '../../../assets/videos/PVA/PVA 10_4_1.mp4'
-import video11 from '../../../assets/videos/PVA/PVA 11_3_1.mp4'
-import video12 from '../../../assets/videos/PVA/PVA 12_4_1.mp4'
-import video13 from '../../../assets/videos/PVA/PVA 13_3_1.mp4'
-
+import video1 from '../../../assets/videos/PVA/1.mp4'
+import video2 from '../../../assets/videos/PVA/2.mp4'
+import video3 from '../../../assets/videos/PVA/3.mp4'
+import video4 from '../../../assets/videos/PVA/4.mp4'
+import video5 from '../../../assets/videos/PVA/5.mp4'
+import video6 from '../../../assets/videos/PVA/6.mp4'
+import video7 from '../../../assets/videos/PVA/7.mp4'
+import video8 from '../../../assets/videos/PVA/8.mp4'
+import video9 from '../../../assets/videos/PVA/9.mp4'
+import video10 from '../../../assets/videos/PVA/10.mp4'
+import video11 from '../../../assets/videos/PVA/11.mp4'
+import video12 from '../../../assets/videos/PVA/12.mp4'
+import video13 from '../../../assets/videos/PVA/13.mp4'
 
 import { useHistory } from 'react-router'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
 
 const thermalstatus = {}
-const thermaltime = {}
 var thermalforms;
 export function Thermal(props) {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
+
+
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
 
     const onClick = (form, status, nextPath) => {
         const { state } = props.location
@@ -38,477 +54,713 @@ export function Thermal(props) {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             })
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
     }
+
     return (
         <>
-            <MasterCheckList bar="0%" nameContinue='success' nameIssue='alert' TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="thermal1" link='/thermal/step2' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer}
+                disabled={buttonStatus} count="13" progressValue="7.69230769231"
+                progressText="1 0f 13" nameContinue='success' nameIssue='alert'
+                TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="thermal1"
+                link='/thermal/step2' />
         </>
     )
 }
 export function Thermal2() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="8%" TypeOfMedia="Video" videosrc={video2} onClick={onClick} alt="thermal2" link='/thermal/step3' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13"
+                progressValue="15.3846153846" progressText="2 0f 13" TypeOfMedia="Video"
+                videosrc={video2} onClick={onClick} alt="thermal2" link='/thermal/step3' />
+
         </>
     )
 }
 export function Thermal3() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="16%" TypeOfMedia="Video" videosrc={video3} onClick={onClick} alt="thermal3" link='/thermal/step4' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="23.0769230769"
+                progressText="3 0f 13" TypeOfMedia="Video" videosrc={video3} onClick={onClick} alt="thermal3"
+                link='/thermal/step4' />
         </>
     )
 }
 export function Thermal4() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="24%" TypeOfMedia="Video" videosrc={video4} onClick={onClick} alt="thermal4" link='/thermal/step5' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="30.7692307692"
+                progressText="4 0f 13" TypeOfMedia="Video" videosrc={video4} onClick={onClick} alt="thermal4"
+                link='/thermal/step5' />
         </>
     )
 }
 export function Thermal5() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="32%" TypeOfMedia="Video" videosrc={video5} onClick={onClick} alt="thermal5" link='/thermal/step6' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="38.4615384615"
+                progressText="5 0f 13" TypeOfMedia="Video" videosrc={video5} onClick={onClick} alt="thermal5"
+                link='/thermal/step6' />
         </>
     )
 }
 export function Thermal6() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="40%" TypeOfMedia="Video" videosrc={video6} onClick={onClick} alt="thermal6" link='/thermal/step7' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="46.1538461539"
+                progressText="6 0f 13" TypeOfMedia="Video" videosrc={video6} onClick={onClick} alt="thermal6"
+                link='/thermal/step7' />
         </>
     )
 }
 export function Thermal7() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="48%" TypeOfMedia="Video" videosrc={video7} onClick={onClick} alt="thermal7" link='/thermal/step8' />
+            <MasterCheckList
+                inputField="true"
+                progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="53.8461538462"
+                progressText="7 0f 13" TypeOfMedia="Video" videosrc={video7} onClick={onClick} alt="thermal7"
+                link='/thermal/step8' />
         </>
     )
 }
 export function Thermal8() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="56%" TypeOfMedia="Video" videosrc={video8} onClick={onClick} alt="thermal8" link='/thermal/step9' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="61.5384615385"
+                progressText="8 0f 13" TypeOfMedia="Video" videosrc={video8} onClick={onClick} alt="thermal8"
+                link='/thermal/step9' />
         </>
     )
 }
 export function Thermal9() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="64%" TypeOfMedia="Video" videosrc={video9} onClick={onClick} alt="thermal9" link='/thermal/step10' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="69.2307692308"
+                progressText="9 0f 13" TypeOfMedia="Video" videosrc={video9} onClick={onClick} alt="thermal9"
+                link='/thermal/step10' />
         </>
     )
 }
 export function Thermal10() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="72%" TypeOfMedia="Video" videosrc={video10} onClick={onClick} alt="thermal10" link='/thermal/step11' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="76.9230769231"
+                progressText="10 0f 13" TypeOfMedia="Video" videosrc={video10} onClick={onClick} alt="thermal10"
+                link='/thermal/step11' />
         </>
     )
 }
 export function Thermal11() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
-                    history.push(nextPath)
-                }
-            })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
                     thermalstatus[form] = status
-                    thermaltime[`${form}time`] = newtime
                     history.push(nextPath)
                 }
             })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="80%" TypeOfMedia="Video" videosrc={video11} onClick={onClick} alt="thermal11" link='/thermal/step12' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="84.6153846154"
+                progressText="11 0f 13" TypeOfMedia="Video" videosrc={video11} onClick={onClick} alt="thermal11"
+                link='/thermal/step12' />
         </>
     )
 }
 export function Thermal12() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
         }
-        if (status === 'Yes')
-            SweetAlert.fire({
-                title: "Good job!",
-                text: "Thank You!",
-                icon: "success",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
-                        history.push(nextPath)
-                    }
-                })
+        // if (status === 'Yes')
+        //     SweetAlert.fire({
+        //         title: "Data Submitted",
+        //         icon: "success",
+        //     })
+        // .then((result) => {
+        if (status === 'Yes') {
+            thermalstatus[form] = status
+            history.push(nextPath)
+        }
+        // })
         if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
-                text: "Please Inform Technician!",
                 icon: "info",
             })
                 .then((result) => {
                     if (result.isConfirmed) {
                         thermalstatus[form] = status
-                        thermaltime[`${form}time`] = newtime
                         history.push(nextPath)
                     }
                 })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="88%" TypeOfMedia="Video" videosrc={video12} onClick={onClick} alt="thermal12" link='/thermal/step13' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="92.3076923077"
+                progressText="12 0f 13" TypeOfMedia="Video" videosrc={video12} onClick={onClick} alt="thermal12"
+                link='/thermal/step13' />
         </>
     )
 }
 export function Thermal13() {
-    var today = new Date();
-    const newtime = today.getHours() + ":" + today.getMinutes()
     const history = useHistory()
+    const [timer, setTimer] = useState(0)
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        // Set up the interval.
+        useEffect(() => {
+            let id = setInterval(() => {
+                savedCallback.current();
+            }, delay);
+            return () => clearInterval(id);
+        }, [delay]);
+    }
+    useInterval(() => { setTimer(timer + 1); }, 1000);
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -526,26 +778,11 @@ export function Thermal13() {
                     SweetAlert.fire('Enter description', '', 'error')
                     return false
                 } else {
-                    thermalstatus["thermal13"] = status
-                    const newotastatus = Object.values(thermalstatus)
                     var finalstatus;
-                    if (newotastatus.includes("No")) {
+                    if (Object.values(thermalstatus).includes("No")) {
                         finalstatus = "In Complete"
                     } else {
                         finalstatus = "Complete"
-                    }
-                    const avg = newotastatus.filter(status => { return status === "No" })
-                    var finalavg
-                    if (avg.length === 0) {
-                        finalavg = '13 / 13'
-                    } else {
-                        finalavg = `${Number(13) - Number(avg.length)}/13`
-                    }
-                    const statuslists = []
-                    for (var i = 0; i < Object.keys(thermalstatus).length; i++) {
-                        if (Object.values(thermalstatus)[i] === "No") {
-                            statuslists.push(Object.keys(thermalstatus)[i])
-                        }
                     }
                     const datas = {
                         date: thermalforms.date,
@@ -565,28 +802,13 @@ export function Thermal13() {
                         thermal11: thermalstatus.thermal11,
                         thermal12: thermalstatus.thermal12,
                         thermal13: status,
-                        thermaltime1: thermaltime.thermaltime,
-                        thermaltime2: thermaltime.thermal2time,
-                        thermaltime3: thermaltime.thermal3time,
-                        thermaltime4: thermaltime.thermal4time,
-                        thermaltime5: thermaltime.thermal5time,
-                        thermaltime6: thermaltime.thermal6time,
-                        thermaltime7: thermaltime.thermal7time,
-                        thermaltime8: thermaltime.thermal8time,
-                        thermaltime9: thermaltime.thermal9time,
-                        thermaltime10: thermaltime.thermal10time,
-                        thermaltime11: thermaltime.thermal11time,
-                        thermaltime12: thermaltime.thermal12time,
-                        thermaltime13: newtime,
                         description: description,
-                        status: finalstatus,
-                        avg: finalavg,
-                        statuslists: statuslists
+                        status: finalstatus
                     }
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
                         if (res.data === true) {
-                            history.push("/")
                         }
+                        history.push("/")
                     }).catch((error) => {
                         console.log(error)
                     })
@@ -595,9 +817,16 @@ export function Thermal13() {
             }
         })
     }
+    const data = thermalforms
+    if (thermalforms === undefined) {
+        return history.push("/thermalform")
+    }
     return (
         <>
-            <MasterCheckList bar="96%" okToComplete="true" TypeOfMedia="Video" videosrc={video13} onClick={onClick} alt="thermal13" link='/' />
+            <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                name={data.operator_name} machineID={data.Station} count="13" progressValue="100"
+                progressText="13 0f 13" okToComplete="true" TypeOfMedia="Video" videosrc={video13}
+                onClick={onClick} alt="thermal13" link='/' />
         </>
     )
 }

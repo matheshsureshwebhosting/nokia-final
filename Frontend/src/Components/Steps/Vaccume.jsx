@@ -62,6 +62,8 @@ const images = [
 ]
 export default class Vacuum extends Component {
     static contextType = Slidercontext
+
+
     render() {
         const { enabled } = this.context
         var stepsArray = Object.keys(enabled).map(function (stepsindex) {
@@ -84,19 +86,19 @@ export default class Vacuum extends Component {
                 <div className='d-flex justify-content-center flex-column align-items-center align-content-center'>
                     {/* <TitleButton>Vacuum Lifter Maintenance</TitleButton> */}
                     <div className=''>
-                            {
-                                images.map((data, index) => (
-                                    <div  key={index} data-aos-easing="ease-in-sine" data-aos-duration="1500" data-aos={data.Animation} className={stepsArray.includes(`step${index + 1}`) ? "m-3 active_div" : "m-3 inactive_div"}>
-                                           <div className='grid-card vacuum-menu-grid d-flex flex-column justify-content-center align-items-center text-center zoom bg-card position-relative' >
-                                            <Link to={stepsArray.includes(`step${index + 1}`) ? `/step${index + 1}` : "#"}>
-                                                <span className={localStorage.getItem(`step${index + 1}`) === "okay" ? "checked_steps" : "notchecked_steps"}><i className="fa fa-check" aria-hidden="true"></i></span>
-                                                <img src={stepsArray.includes(`step${index + 1}`) ? data.image : lockedImg} alt='Step1' loading="lazy" className={stepsArray.includes(`step${index + 1}`) ? "w-75 h-75 pt-5 " :"w-100 h-100 "} />
-                                            </Link>
-                                            {stepsArray.includes(`step${index + 1}`) &&<span className="vacuum-grid-tag">{data.title}</span>}
-                                        </div>
+                        {
+                            images.map((data, index) => (
+                                <div key={index} data-aos-easing="ease-in-sine" data-aos-duration="1500" data-aos={data.Animation} className={stepsArray.includes(`step${index + 1}`) ? "m-3 active_div" : "m-3 inactive_div"}>
+                                    <div className='grid-card vacuum-menu-grid d-flex flex-column justify-content-center align-items-center text-center zoom bg-card position-relative' >
+                                        <Link to={stepsArray.includes(`step${index + 1}`) ? `/step${index + 1}` : "#"}>
+                                            <span className={localStorage.getItem(`step${index + 1}`) === "okay" ? "checked_steps" : "notchecked_steps"}><i className="fa fa-check" aria-hidden="true"></i></span>
+                                            <img src={stepsArray.includes(`step${index + 1}`) ? data.image : lockedImg} alt='Step1' loading="lazy" className={stepsArray.includes(`step${index + 1}`) ? "w-75 h-75 pt-5 " : "w-100 h-100 "} />
+                                        </Link>
+                                        {stepsArray.includes(`step${index + 1}`) && <span className="vacuum-grid-tag">{data.title}</span>}
                                     </div>
-                                ))
-                            }
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </>

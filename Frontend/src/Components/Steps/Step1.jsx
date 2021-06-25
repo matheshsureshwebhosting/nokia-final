@@ -8,6 +8,7 @@ export default class Step1 extends Component {
     static contextType = Slidercontext
     constructor(props) {
         super()
+        this.stepRef = React.createRef()   // Create a ref object 
         this.state = {
             machine_name: "",
             machine_Sl_No: "",
@@ -17,9 +18,14 @@ export default class Step1 extends Component {
             shifta: false,
             shiftb: false,
             shiftc: false,
+            buttonStatus: false,
+            counterTime: 0
         }
     }
+
+
     componentDidMount = () => {
+        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
         var today = new Date();
         const hours = today.getHours() + ":" + today.getMinutes()
         if (hours < "14:30") {
@@ -39,46 +45,43 @@ export default class Step1 extends Component {
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
+    componentWillUnmount = () => {
+        clearInterval(this.interval);
+    }
 
-    render() {   
-        var today = new Date();
-        const newtime = today.getHours() + ":" + today.getMinutes() 
+    render() {
+        // Button Status Switcher
+        const buttonStatus = this.state.counterTime > 5 ? false : true;
         const { sliderenable } = this.context
-        const Displayalert = (name, results) => {            
-            if (name === "alertSuccess")
+        const Displayalert = (name, results) => {
+            const { operator_name } = this.context
+            if (operator_name === null) return window.location.replace("/VacuumForm")            
+            if (name === "alertSuccess") {
+                const { updatestaus } = this.context
+                updatestaus("prosses1_result", results, this.state.counterTime)
+                localStorage.setItem("step1", "okay")
+                sliderenable(this, "step2")
+                this.props.history.push("/step2")
+            }            
+            if (name === "alert")
                 SweetAlert.fire({
-                    title: "Good job!",
-                    text: "Thank You!",
-                    icon: "success",
-                }).then((result) => {                
-                    if (result.isConfirmed) {            
-                               
+                    title: "OK Noted",
+                    icon: "info",
+                }).then((result) => {
+                    if (result.isConfirmed) {
                         const { updatestaus } = this.context
-                        updatestaus("prosses1_result", results,newtime)
+                        updatestaus("prosses1_result", results, this.state.counterTime)
                         localStorage.setItem("step1", "okay")
                         sliderenable(this, "step2")
                         this.props.history.push("/step2")
                     }
                 })
-                else if(name==="alert")
-                SweetAlert.fire({
-                    title: "OK Noted",
-                    text: "Please Inform Technician!",
-                    icon: "info",
-                }).then((result) => {                
-                if (result.isConfirmed) {                   
-                    const { updatestaus } = this.context
-                    updatestaus("prosses1_result", results,newtime)
-                    localStorage.setItem("step1", "okay")
-                    sliderenable(this, "step2")
-                    this.props.history.push("/step2")
-                }
-            })
-        }
-
+        }      
         return (
             <>
                 <Steps
+                    disabled={buttonStatus}
+                    timer={this.state.counterTime}
                     ContinueBtnName="OK To continue"
                     IssueBtnName="RAISE ISSUE"
                     stepTitle="Lifting Handle and Pad Cleaning"
@@ -88,7 +91,7 @@ export default class Step1 extends Component {
                     onClickContinue={(e) => Displayalert(e.target.name, "Yes")}
                     onClickIssue={(e) => Displayalert(e.target.name, "No")}
                 />
-            </>
+            </ >
         )
     }
 }

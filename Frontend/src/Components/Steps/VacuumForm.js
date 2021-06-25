@@ -43,6 +43,7 @@ export class VacuumForm extends Component {
             })
         }
     }
+
     handleChange = (e) => {
         const { handleChange } = this.context
         handleChange(e)
@@ -57,6 +58,8 @@ export class VacuumForm extends Component {
         } else {
             this.props.history.push("/step1");
         }
+        localStorage.setItem("vacName", this.state.operator_name)
+        localStorage.setItem("vacMachineId", this.state.machine_Sl_No)
     }
     render() {
         //ToolTips 
@@ -83,7 +86,8 @@ export class VacuumForm extends Component {
         const nameInputClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <Navbar logo="NOKIA" />
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Vacuum Lifter Maintenance Form" />
+
                 <div className=" bg-primary d-flex justify-content-center flex-column align-items-center h-90" style={{ width: "100%" }}>
                     <div className='d-flex justify-content-center h-auto w-75'>
                         <div className='h-100 w-50'>
@@ -99,7 +103,7 @@ export class VacuumForm extends Component {
                                     overlay={serialTooltip}
                                 >
                                     <div>
-                                        <Form.Group className='d-flex justify-content-between'><Form.Label className='text-left pt-1 input-label w-50'>Machine Serial No:</Form.Label><Form.Control className={machineInputClass} type="text" placeholder="HDOS768SNK" name="machine_Sl_No" autoFocus required onChange={(e) => this.handleChange(e)}></Form.Control> </Form.Group>
+                                        <Form.Group className='d-flex justify-content-between'><Form.Label className='text-left pt-1 input-label w-50'>Machine Serial No / Scan:</Form.Label><Form.Control className={machineInputClass} type="text" placeholder="HDOS768SNK" name="machine_Sl_No" autoFocus required onChange={(e) => this.handleChange(e)}></Form.Control> </Form.Group>
                                         {this.state.machineError && <p className='errorMessage'>*The machine serial no must not be empty</p>}
                                     </div>
                                 </OverlayTrigger>

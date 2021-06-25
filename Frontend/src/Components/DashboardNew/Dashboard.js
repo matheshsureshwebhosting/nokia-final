@@ -68,7 +68,7 @@ function Dashboard() {
                                 <li onClick={() => setshowTable(1)}>vacuum lifter</li>
                                 <li onClick={() => setshowTable(2)}>OTA</li>
                                 <li onClick={() => setshowTable(3)}>UWA</li>
-                                <li onClick={() => setshowTable(4)}>Thermal</li>                                
+                                <li onClick={() => setshowTable(4)}>Thermal</li>
                             </ul>
                         </Accordion.Collapse>
                     </Accordion>
@@ -78,8 +78,8 @@ function Dashboard() {
                         <div className="col-md-3">
                             <div className="card-counter primary position-relative">
                                 <i className="fa fa-code-fork"></i>
-                                <span className="count-numbers">12</span>
-                                <span className="count-name">Checklists</span>
+                                <span className="count-numbers">6</span>
+                                <span className="count-name">InComplete</span>
                                 <span style={cardBottom}>TODAY</span>
                             </div>
                         </div>
@@ -87,8 +87,8 @@ function Dashboard() {
                         <div className="col-md-3">
                             <div className="card-counter danger position-relative">
                                 <i className="fa fa-spin fa-cog"></i>
-                                <span className="count-numbers">599</span>
-                                <span className="count-name">Processes</span>
+                                <span className="count-numbers">3</span>
+                                <span className="count-name">Missed</span>
                                 <span style={cardBottom}>TODAY</span>
                             </div>
                         </div>
@@ -97,17 +97,17 @@ function Dashboard() {
                             <div className="card-counter info position-relative">
                                 <i className="fa fa-bar-chart"></i>
                                 <span className="count-numbers">35</span>
-                                <span className="count-name">Completed Jobs</span>
+                                <span className="count-name">Completed</span>
                                 <span style={cardBottom}>TODAY</span>
                             </div>
                         </div>
                     </div>
                     <div className="mt-5">
                         {
-                          table ? showTable === 0 ? <SolderTable /> : showTable === 1 ? <VacuumTable /> : showTable === 2 ? <OtaTable /> : showTable === 3 ? <UwaTable /> : showTable === 4 ? <ThermalTable /> : null : null
+                            table ? showTable === 0 ? <SolderTable /> : showTable === 1 ? <VacuumTable /> : showTable === 2 ? <OtaTable /> : showTable === 3 ? <UwaTable /> : showTable === 4 ? <ThermalTable /> : null : null
                         }
                         {
-                          report ? showreportTable === 0 ? <SolderingTables /> : showreportTable === 1 ? <VaccumeTables /> : showreportTable === 2 ? <OtaTables /> : showreportTable === 3 ? <UwaTables /> : showreportTable === 4 ? <ThermalTables /> : null : null
+                            report ? showreportTable === 0 ? <SolderingTables /> : showreportTable === 1 ? <VaccumeTables /> : showreportTable === 2 ? <OtaTables /> : showreportTable === 3 ? <UwaTables /> : showreportTable === 4 ? <ThermalTables /> : null : null
                         }
                     </div>
 
@@ -134,5 +134,3 @@ function Dashboard() {
 }
 
 export default Dashboard
-
-

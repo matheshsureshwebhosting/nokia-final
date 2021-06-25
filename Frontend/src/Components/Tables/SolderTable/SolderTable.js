@@ -92,7 +92,7 @@ export default class SolderTable extends Component {
         return (
             <>
                 <div className='p-3 container-fluid'>
-                    <h3 className='text-center mb-4 text-dark' style={{ marginBottom: "10px !important" }}>Solder Tip Temperature Monitoring</h3>
+                    <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Solder Tip Temperature Monitoring</h3>
 
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">

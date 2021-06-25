@@ -45,7 +45,7 @@
   position: absolute;
   right: 15px;
   top: 20px;
-  font-size: 32px;
+  font-size: 40px;
   display: block;
 }
 
@@ -57,7 +57,7 @@
   text-transform: capitalize;
   opacity: 0.5;
   display: block;
-  font-size: 18px;
+  font-size: 32px;
 }
 
 .vacuumbtn,
@@ -105,7 +105,6 @@
 }
 .dashboard-container {
   height: 100vh;
-  color: #fff;
 }
 .dashbord-wrap {
   display: flex;
@@ -114,14 +113,16 @@
   background-color: #124191;
   height: 100vh;
   overflow-y: scroll;
+  color: #fff;
   padding: 0;
 }
 .dashboard-section {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  position: fixed;
-  right: 0;
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
   height: 100%;
 }
 .dashboard-logo {

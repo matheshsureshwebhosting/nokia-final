@@ -9,53 +9,61 @@ export default class Step3 extends Component {
     static contextType = Slidercontext
     constructor(props) {
         super()
+        this.step3Ref = React.createRef()   // Create a ref object 
         this.state = {
             date: "",
             machine_name: "",
             machine_Sl_No: "",
             operator_name: "",
             shift: "",
-            paymentType: ""
+            paymentType: "",
+            counterTime: 0
+
         }
     }
-
+    componentDidMount() {
+        this.step3Ref.current.scroll(0, 550);
+        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
+    }
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
+    componentWillUnmount = () => {
+        clearInterval(this.interval);
+    }
     render() {
-        var today = new Date();
-        const newtime = today.getHours() + ":" + today.getMinutes() 
+        const buttonStatus = this.state.counterTime > 5 ? false : true;
         const { sliderenable } = this.context
-        const Displayalert = (name, results) => {            
-            if (name === "alertSuccess")
-                SweetAlert.fire({
-                    title: "Good job!",
-                    text: "Thank You!",
-                    icon: "success",
-                }).then((result) => {
-                    if (result.isConfirmed) {                        
-                        const { updatestaus } = this.context
-                        updatestaus("prosses3_result", results,newtime)                        
-                        localStorage.setItem("step3", "okay")
-                        sliderenable(this, "step4")
-                        this.props.history.push("/step4")
-                    }
-                })
-                else if(name==="alert")
+        const Displayalert = (name, results) => {
+            const { operator_name } = this.context
+            if (operator_name === null) return window.location.replace("/VacuumForm") 
+            // if (name === "alertSuccess")
+            //     SweetAlert.fire({
+            //         title: "Data Submitted",
+            //         icon: "success",
+            //     }).then((result) => {
+            if (name === "alertSuccess") {
+                const { updatestaus } = this.context
+                updatestaus("prosses3_result", results,this.state.counterTime)
+                localStorage.setItem("step3", "okay")
+                sliderenable(this, "step4")
+                this.props.history.push("/step4")
+            }
+            // })
+            else if (name === "alert")
                 SweetAlert.fire({
                     title: "OK Noted",
-                    text: "Please Inform Technician!",
                     icon: "info",
                 }).then((result) => {
-                    if (result.isConfirmed) {                        
+                    if (result.isConfirmed) {
                         const { updatestaus } = this.context
-                        updatestaus("prosses3_result", results,newtime)                        
+                        updatestaus("prosses3_result", results,this.state.counterTime)
                         localStorage.setItem("step3", "okay")
                         sliderenable(this, "step4")
                         this.props.history.push("/step4")
                     }
                 })
-            
+
         }
         return (
             <Fragment>
@@ -80,15 +88,18 @@ export default class Step3 extends Component {
                         </div>
                     </div>
                 </div> */}
-                <Steps
-                ContinueBtnName="OK To continue"
-                IssueBtnName="RAISE ISSUE"
-                nameContinue="alertSuccess"
-                nameIssue="alert"
-                stepTitle="Vacuum Barrel and Joints Cleaning And Inspection"
-                videoSrc={video1}
-                onClickContinue={(e) => Displayalert(e.target.name, "Yes")}
-                onClickIssue={(e)=>Displayalert(e.target.name,"No")}
+                < Steps
+                    disabled={buttonStatus}
+                    timer={this.state.counterTime}
+                    vacRef={this.step3Ref}
+                    ContinueBtnName="OK To continue"
+                    IssueBtnName="RAISE ISSUE"
+                    nameContinue="alertSuccess"
+                    nameIssue="alert"
+                    stepTitle="Vacuum Barrel and Joints Cleaning And Inspection"
+                    videoSrc={video1}
+                    onClickContinue={(e) => Displayalert(e.target.name, "Yes")}
+                    onClickIssue={(e) => Displayalert(e.target.name, "No")}
                 />
             </Fragment >
         )

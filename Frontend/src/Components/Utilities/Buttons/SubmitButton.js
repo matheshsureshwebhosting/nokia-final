@@ -7,7 +7,7 @@ function SubmitButton(props) {
     const [submit, setSubmit] = useState(false)
     return (
         <>
-            <Button className='submit-button' name={props.name} onClick={props.onClick} onMouseEnter={() => setSubmit(true)} onMouseLeave={() => setSubmit(false)} >
+            <Button className='submit-button' disabled={props.disabled} name={props.name} onClick={props.onClick} onMouseEnter={() => setSubmit(true)} onMouseLeave={() => setSubmit(false)} >
                 <span className='d-flex mt-1' >
                     <span className={submit ? "sub-active" : "sub-hidden"}>{props.buttonName}</span>
                     <IconContext.Provider value={{ className: submit ? "submit-icon-active" : "submit-icon" }}>
