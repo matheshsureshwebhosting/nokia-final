@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import solderImg from "../../assets/img/home/Mask Group 10.png"
 import vacuumImg from "../../assets/img/home/Mask Group 7.png"
 import gel from '../../assets/img/home/Mask Group 11.png';
@@ -11,7 +11,25 @@ import './Homes.css'
 import { Navbar } from '../Navbar/Navbar'
 import dashboardIcon from "../../assets/img/home/app-store.svg";
 function Home(props) {
+  useEffect(() => {
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+      return "show warning";
+    }
+  }, [])
 
+  const triggerThis = () => {
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+      return "show message";
+    }
+  }
+
+
+
+  // The button to trigger the action
+
+  <button onClick={() => triggerThis()}> Click here</button>
   return (
     <>
       <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Autonomous Maintenance" src={dashboardIcon} alt="" />

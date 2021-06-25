@@ -33,11 +33,27 @@ function Steps(props) {
                             }
                         >
                             <div className='d-flex'>
-                      <button disabled={props.disabled}  className="step-continue-btn" name={props.nameContinue} onClick={props.onClickContinue}>{props.ContinueBtnName}<i className='fa fa-thumbs-up fa-2x mx-2' /></button> 
+                                <button disabled={props.disabled} className="step-continue-btn" name={props.nameContinue} onClick={props.onClickContinue}>{props.ContinueBtnName}<i className='fa fa-thumbs-up fa-2x mx-2' /></button>
                                 <button disabled={props.disabled} className="raise-issue-btn" name={props.nameIssue} onClick={props.onClickIssue}>{props.IssueBtnName}<i className='fa fa-thumbs-down fa-2x mx-2' /></button>
                             </div>
                         </OverlayTrigger>
-                        {props.inputField && <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}>Enter Pressure Guage Value: <input type='text' onChange={props.onChange} name="pressure_guage_value" placeholder={props.placeholder} value={props.value} /></div>}
+
+                        {props.inputField &&
+                            <OverlayTrigger
+                                key="top"
+                                top="top"
+                                overlay={
+                                    <Tooltip id={`tooltip-top`} >
+                                        <div className=''>Please Enter The Value</div>
+                                    </Tooltip>
+                                }
+                            >
+                                <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}> Enter The Pressure Guage Value:
+                                    <input autoFocus="true" type='text' className={`${props.error}` && "error-bg border-danger"} onChange={props.onChange} name={props.name} placeholder={props.placeholder} value={props.value} />
+                                </div>
+                            </OverlayTrigger>
+                        }
+
                         <div className='vac-user-det'>
                             <div className='d-flex '>
                                 <div className="data-title">Operator Name :</div>
@@ -54,7 +70,7 @@ function Steps(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

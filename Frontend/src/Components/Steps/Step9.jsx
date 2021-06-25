@@ -19,8 +19,11 @@ export default class Step9 extends Component {
             operator_name: "",
             shift: "",
             paymentType: "",
-            pressure_guage_value:"",
-            counterTime: 0
+            pressure_guage_value: "",
+            counterTime: 0,
+            error: "",
+            nameAlert: "",
+            nameSuccess: ""
         }
     }
     componentDidMount() {
@@ -41,8 +44,43 @@ export default class Step9 extends Component {
         const buttonStatus = this.state.counterTime > 5 ? false : true;
         const Displayalert = (name, results) => {
             const { operator_name } = this.context
-            if (operator_name === null) return window.location.replace("/VacuumForm") 
-            if (name === "alert")
+            if (operator_name === null) return window.location.replace("/VacuumForm")
+
+            // Form validation for pressure_guage_value
+
+            if (this.state.pressure_guage_value !== "") {
+                this.setState({ nameAlert: "alert", nameSuccess: "alertSuccess" })
+            }
+            else if (this.state.pressure_guage_value <= 400 && this.state.pressure_guage_value >= 600) {
+                this.setState({ nameAlert: "invalid", nameSuccess: "invalid" })
+                this.setState({ error: "true" })
+            }
+            else {
+                this.setState({ nameAlert: "empty" })
+                this.setState({ nameSuccess: "empty" })
+                this.setState({ error: "true" })
+            }
+
+            // empty data alert
+            // if(name="invalid+")
+            if (name === "invalid") {
+                SweetAlert.fire({
+                    // text: "Please Inform Technician!",
+                    icon: "warning",
+                    title: 'Entered Value Is Not In Valid Range',
+                    confirmButtonText: `OK`,
+                })
+            }
+            if (name === "empty") {
+                SweetAlert.fire({
+                    // text: "Please Inform Technician!",
+                    icon: "error",
+                    title: 'Please Enter The Pressure Guage Value',
+                    confirmButtonText: `OK`,
+                })
+            }
+
+            if (name === "alert") {
                 SweetAlert.fire({
                     // text: "Please Inform Technician!",
                     icon: "info",
@@ -59,7 +97,7 @@ export default class Step9 extends Component {
                                 SweetAlert.fire('Enter description', '', 'error')
                                 return false
                             } else {
-                                SweetAlert.fire('Saved!', '', 'success')                               
+                                SweetAlert.fire('Saved!', '', 'success')
                                 const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context
                                 const prosses = {
                                     "step1": prosses1_result,
@@ -121,8 +159,8 @@ export default class Step9 extends Component {
                                     status: finalstatus,
                                     avg: finalavg,
                                     statuslists: statuslists,
-                                    pressure_guage_value:this.state.pressure_guage_value, 
-                                }                                
+                                    pressure_guage_value: this.state.pressure_guage_value,
+                                }
                                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                                     if (res.data === true) {
                                         localStorage.removeItem("step1")
@@ -141,6 +179,7 @@ export default class Step9 extends Component {
                             SweetAlert.fire('Changes are not saved', '', 'info')
                         }
                     })
+            }
             if (name === "alertSuccess")
                 SweetAlert.fire({
                     title: 'Provide Following Details',
@@ -218,8 +257,8 @@ export default class Step9 extends Component {
                                     status: finalstatus,
                                     avg: finalavg,
                                     statuslists: statuslists,
-                                    pressure_guage_value:this.state.pressure_guage_value,                                    
-                                }                                
+                                    pressure_guage_value: this.state.pressure_guage_value,
+                                }
                                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                                     if (res.data === true) {
                                         localStorage.removeItem("step1")
@@ -243,14 +282,17 @@ export default class Step9 extends Component {
         return (
             <>
                 <Steps
+                    error={this.state.error}
+                    name="pressure_guage_value"
                     disabled={buttonStatus}
+                    placeholder="Example 400"
                     timer={this.state.counterTime}
                     inputField="true"
                     vacRef={this.step9Ref}
-                    nameContinue="alertSuccess"
+                    nameContinue={this.state.nameSuccess}
                     ContinueBtnName="OK To complete"
                     IssueBtnName="RAISE ISSUE"
-                    nameIssue="alert"
+                    nameIssue={this.state.nameAlert}
                     stepTitle="Vacuum Pressure Gauge"
                     videoSrc={video1}
                     onChange={this.handleChange}
