@@ -424,6 +424,21 @@ export function Thermal7() {
             })
             setError("true")
         }
+        if (status === 'No' || !(pressureValue < 49) || !(pressureValue > 70))
+            SweetAlert.fire({
+                title: "Value Should be 50 To 70 PSI",
+                icon: "warning",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    thermalstatus[form] = status
+                    history.push(nextPath)
+                }
+            })
+        if (status === 'Yes' || !(pressureValue < 49) || !(pressureValue > 70))
+            SweetAlert.fire({
+                title: "Value Should be 50 To 70 PSI",
+                icon: "warning",
+            })
         // if (pressureValue.NaN) {
         //     SweetAlert.fire({
         //         title: "Please enter the pressure guage value in number",
@@ -456,7 +471,7 @@ export function Thermal7() {
         <>
             <MasterCheckList
                 InputName="pressure_guage_value"
-                placeholder="Example 400"
+                placeholder="50 to 70 PSI"
                 errorState={error}
                 onChangeInput={e => setPressureValue(e.target.value)}
                 inputField="true"

@@ -24,7 +24,6 @@ function Steps(props) {
                     </div>
                     <div className="d-flex justify-content-center align-items-center my-4">
                         <OverlayTrigger
-                            key="top"
                             top="top"
                             overlay={
                                 <Tooltip id={`tooltip-top`} >
@@ -49,7 +48,7 @@ function Steps(props) {
                                 }
                             >
                                 <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}> Enter The Pressure Guage Value:
-                                    <input autoFocus="true" type='text' className={`${props.error}` && "error-bg border-danger"} onChange={props.onChange} name={props.name} placeholder={props.placeholder} value={props.value} />
+                                    <input autoFocus={true} type='text' className={`${props.error}` && "error-bg border-danger"} onChange={props.onChangeVacInput} name={props.name} placeholder={props.placeholder} value={props.value} />
                                 </div>
                             </OverlayTrigger>
                         }
