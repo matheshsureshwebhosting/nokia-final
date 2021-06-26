@@ -38,25 +38,25 @@ function Home(props) {
           <div className="col-6 d-flex flex-column justify-content-center align-items-center align-content-center">
 
             <div className='d-flex justify-content-center'>
-              <Link to="/VacuumForm" className='d-flex justify-content-end'><img src={vacuumImg} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
-              <Link to="/SolderForm" className='d-flex justify-content-center'><img src={solderImg} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
+              <Link to="/VacuumForm" className='d-flex justify-content-end'><img src={vacuumImg} alt='vacuum-img' className="home-grid-menu" /></Link>
+              <Link to="/SolderForm" className='d-flex justify-content-center'><img src={solderImg} alt='vacuum-img' className="home-grid-menu" /></Link>
             </div>
 
             <div className='d-flex justify-content-around'>
-              <Link to="/Testers" className='d-flex justify-content-end'><img src={testers} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
-              <Link to="/thermalmain" className='d-flex justify-content-center'><img src={gel} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
+              <Link to="/Testers" className='d-flex justify-content-end'><img src={testers} alt='vacuum-img' className="home-grid-menu" /></Link>
+              <Link to="/thermalmain" className='d-flex justify-content-center'><img src={gel} alt='vacuum-img' className="home-grid-menu" /></Link>
             </div>
 
             <div className='d-flex justify-content-around'>
-              <Link to="/" className='d-flex justify-content-end'><img src={robot} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
-              <Link to="/" className='d-flex justify-content-center'><img src={packing} alt='vacuum-img' style={{ height: "25vh", width: "80%", marginBottom: "1.5rem" }} /></Link>
+              <Link to="/" className='d-flex justify-content-end'><img src={robot} alt='vacuum-img' className="home-grid-menu" /></Link>
+              <Link to="/" className='d-flex justify-content-center'><img src={packing} alt='vacuum-img' className="home-grid-menu" /></Link>
             </div>
           </div>
           <div className="col-6 my-auto d-flex flex-column align-content-center align-items-center justify-content-center">
-            <div className="col-7">
-              <h4 style={{ textAlign: "justify", lineHeight: "1.6" }}>
+            <div className="col-xxl-7">
+              <h4 style={{ textAlign: "center", lineHeight: "1.6" }}>
                 Autonomous maintenance Check points for Key Process Stages can be accessed by operators.
-                The Check lists need to be filed and maintained at beginning of every shift to ensure
+                The Check lists need to be filled and maintained at beginning of every shift to ensure
                 process quality and efficiency of these equipment.
               </h4>
             </div>
@@ -70,54 +70,3 @@ function Home(props) {
 }
 
 export default Home
-//  <div className='d-flex justify-content-center flex-column align-items-center w-100 bg-primary overflow-hidden' style={{ height: "100vh" }}>
-//         <h2 data-aos-duration="2000" data-aos="zoom-in" className="white p-3 heading">Digital WorkStation</h2>
-//         <Link to='/dashboard'><i className="fa fa-database dashboard-icon"></i></Link>
-//         <div style={{ height: "80vh", width: "75%" }}>
-//           <div className='h-50 d-flex justify-content-around py-2'>
-
-//             <div data-aos-duration="3000" data-aos="fade-down-right" className='glassCard d-flex flex-column justify-content-center align-items-center text-center zoom' style={{ height: "100%", width: "28%" }}>
-//               <Link to='/SolderForm'>
-//                 <img src={solderImg} alt='solderImg' className="" loading="lazy" style={{ height: "90%", width: "70%" }} />
-//               </Link>
-//               <span className='home-card-title'>Soldering Tip Temperature <br />Measurement</span>
-//             </div>
-
-//             <div data-aos-duration="3000" data-aos="fade-down" className='glassCard d-flex flex-column justify-content-center align-items-center text-center zoom' style={{ height: "100%", width: "28%" }}>
-//               <Link to='/vacuumform'>
-//                 <img src={vacuumImg} alt='solderImg' className="" loading="lazy" style={{ height: "90%", width: "70%" }} />
-//               </Link>
-//               <span className='home-card-title'>Vacuum Lifter Daily Maintenance Checklist</span>
-//             </div>
-
-//             <div data-aos-duration="3000" data-aos="fade-down-left" className='glassCard zoom text-center heading d-flex flex-column justify-content-center align-items-center' style={{ height: "100%", width: "28%" }}>
-//               <span className='home-card-title p-3'> Checklist 3</span>
-//             </div>
-//           </div>
-
-//           <div className='h-50 d-flex justify-content-around py-3'>
-
-//             <div data-aos-duration="3000" data-aos="fade-up-right" className='glassCard zoom text-center heading d-flex flex-column justify-content-center align-items-center' style={{ height: "100%", width: "28%" }}>
-//               <span className='home-card-title p-3'> Checklist 4</span>
-//             </div>
-//             <div data-aos-duration="3000" data-aos="fade-up" className='glassCard zoom text-center heading d-flex flex-column justify-content-center align-items-center' style={{ height: "100%", width: "28%" }}>
-//               <span className='home-card-title p-3'> Checklist 5</span>
-//             </div>
-//             <div data-aos-duration="3000" data-aos="fade-up-left" className='glassCard zoom text-center heading d-flex flex-column justify-content-center align-items-center' style={{ height: "100%", width: "28%" }}>
-//               <span className='home-card-title p-3'> Checklist 6</span>
-//             </div>
-
-//           </div>
-//         </div>
-//       </div> 
-
-
-// {
-//                 (data.map((value, index) => (
-//                   <div key={index} className='home-menu-grid' data-aos-duration="3000" data-aos={value.animation}>
-//                     <Link to={value.link}>
-//                       <img style={{ height: "94%", width: "94%" }} src={value.img} alt={value.alt} />
-//                     </Link>
-//                   </div>
-//                 )))
-//               }

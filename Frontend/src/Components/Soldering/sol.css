@@ -209,3 +209,28 @@
   right: 5%;
   top: 2%;
 }
+.solder-radiobtn {
+  width: 15px !important;
+  position: relative !important;
+  top: -5px !important;
+}
+.solder-card-title {
+  font: 1.5em sans-serif;
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .stem {
+    height: 200px;
+  }
+  #line {
+    line-height: 0.75rem;
+  }
+  #marks {
+    bottom: 175px;
+  }
+  .tempcounter::after {
+    width: 85px;
+    font-size: 12px;
+    padding: 10px;
+    right: 0;
+  }
+}

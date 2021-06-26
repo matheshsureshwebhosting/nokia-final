@@ -9,8 +9,7 @@ export default class Testers extends Component {
     render() {
         return (
             <>
-
-                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Testers Checklist" />
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Testers Autonomous Maintenance" />
                 <div className="d-flex justify-content-center align-items-center bg-primary flex-column h-90">
                     <div className="d-flex justify-content-center my-5">
                         <Link to="/otaform" >

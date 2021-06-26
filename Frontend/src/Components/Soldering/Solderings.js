@@ -25,8 +25,10 @@ export default class Solderings extends Component {
             counterTime: 0
         }
     }
+
     componentDidMount = () => {
-        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
+        const modal = this.modalShow
+        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1, modal }), 1000);
     }
     componentWillUnmount = () => {
         clearInterval(this.interval);
@@ -130,44 +132,38 @@ export default class Solderings extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitbtn = (e, status) => {
-        const { solder_model, temp,counterTime } = this.state
+        const { solder_model, temp, counterTime } = this.state
         SweetAlert.fire({
-            title: 'Provide Following Details',
-            html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks... if you changed the cartridge please leave the message'></textarea>",
-            showDenyButton: false,
-            showCancelButton: false,
+            icon: 'success',
+            title: 'Soldering Tooltip Temperature Measure Recorded Successfully',
+            // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks... if you changed the cartridge please leave the message'></textarea>",
+            // showDenyButton: false,
+            // showCancelButton: false,
             confirmButtonText: `Save`,
         }).then((result) => {
             if (result.isConfirmed) {
-                const description = document.getElementById("des").value
-                if (description.length === 0) {
-                    SweetAlert.fire('Enter description', '', 'error')
-                    return false
+                const { Solderform } = this.props
+                const datas = {
+                    date: Solderform.date,
+                    shift: Solderform.shift,
+                    station: Solderform.Station,
+                    catridge_used: solder_model,
+                    temperature: temp,
+                    checked_by: Solderform.operator_name,
+                    status: "Complete",
+                    // description: description,
+                    time: counterTime
                 }
-                else {
-                    const { Solderform } = this.props
-                    const datas = {
-                        date: Solderform.date,
-                        shift: Solderform.shift,
-                        station: Solderform.Station,
-                        catridge_used: solder_model,
-                        temperature: temp,
-                        checked_by: Solderform.operator_name,
-                        status: "Complete",
-                        description: description,
-                        time:counterTime
-                    }
-                    console.log(datas)
-                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering/send`, datas).then((res) => {
-                        SweetAlert.fire('Saved!', '', 'success').then((result) => {
-                            if (result.isConfirmed) {
-                            }
-                            window.location.replace("/")
-                        })
+                console.log(datas)
+                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering/send`, datas).then((res) => {
+                    SweetAlert.fire('Saved!', '', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                        window.location.replace("/")
                     })
-                }
-            } else if (result.isDenied) {
-                SweetAlert.fire('Changes are not saved', '', 'info')
+                })
+                // }
+
             }
         })
     }
@@ -180,10 +176,10 @@ export default class Solderings extends Component {
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp + 1 });
         if (temp <= tempA && temp >= tempB) {
-            this.setState({ error: false, error2: false });
+            this.setState({ error: true, modalShow: true });
         }
         else {
-            this.setState({ error: true, modalShow: true });
+            this.setState({ error: false, error2: false });
         }
     }
     decrement = () => {
@@ -191,24 +187,20 @@ export default class Solderings extends Component {
         const tempA = tempValid + 9;
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp - 1 });
-        if (temp <= tempA && temp >= tempB) {
-            this.setState({ error: false, error2: false });
-        }
-        else {
+        if ((temp <= tempA) && (temp >= tempB)) {
             this.setState({ error: true, modalShow: true });
         }
-
+        else {
+            console.log("hi")
+            this.setState({ error: false, error2: false });
+        }
     }
 
     render() {
         // Button Status Switcher
         const buttonStatus = this.state.counterTime > 5 ? false : true;
         const { temp } = this.state
-        const radiobtn = {
-            width: "20px",
-            marginTop: "10px",
-            height: "20px"
-        }
+
         //-----------------tooltips-----------------//
         const sol1 = (props) => (
             <Tooltip id="button-tooltip" {...props}>
@@ -366,7 +358,7 @@ export default class Solderings extends Component {
                         <div className='col-4'>
                             <div className='d-flex justify-content-around w-100 h-100'>
                                 <div className='formCard flcc glassCard bt-blue bt-bottom w-100 my-auto h-100' style={{ height: "max-content" }}>
-                                    <h5 className='text-center my-4 text-capitalize heading white fa-2x'>Soldering Catridge Type</h5>
+                                    <h5 className='solder-card-title text-center my-4 text-capitalize heading white fa-2x'>Soldering Catridge Type</h5>
                                     <div className="d-flex justify-content-center align-items-center ">
 
                                         {/*------------------- Soldering ToolTips---------------------- */}
@@ -379,7 +371,7 @@ export default class Solderings extends Component {
                                                 overlay={sol1}
                                             >
                                                 <Form.Group onClick={this.sttc117} className="d-flex h-20px" >
-                                                    <Form.Control name='solder_model' autoFocus type='radio' value="STTC 117" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' autoFocus type='radio' value="STTC 117 /396°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 117</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -390,7 +382,7 @@ export default class Solderings extends Component {
                                                 overlay={sol2}
                                             >
                                                 <Form.Group onClick={this.sttc817} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 817" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 817 / 482°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 817</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -401,7 +393,7 @@ export default class Solderings extends Component {
                                                 overlay={sol3}
                                             >
                                                 <Form.Group onClick={this.sttc162} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 162" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 162 / 382°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 162</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -412,7 +404,7 @@ export default class Solderings extends Component {
                                                 overlay={sol4}
                                             >
                                                 <Form.Group onClick={this.sttc160} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 160" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 160 / 398°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 160</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -423,7 +415,7 @@ export default class Solderings extends Component {
                                                 overlay={sol5}
                                             >
                                                 <Form.Group onClick={this.sttc804L} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 804L" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 804L / 425°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 804L</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -434,7 +426,7 @@ export default class Solderings extends Component {
                                                 overlay={sol6}
                                             >
                                                 <Form.Group onClick={this.sttc198} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 198" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 198 / 393°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 198</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -445,7 +437,7 @@ export default class Solderings extends Component {
                                                 overlay={sol7}
                                             >
                                                 <Form.Group onClick={this.sttc836} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 836" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 836 / 479°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 836</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -456,7 +448,7 @@ export default class Solderings extends Component {
                                                 overlay={sol8}
                                             >
                                                 <Form.Group onClick={this.sttc837} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 837" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control name='solder_model' type='radio' value="STTC 837 / 485°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 837</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>
@@ -467,7 +459,7 @@ export default class Solderings extends Component {
                                                 overlay={sol9}
                                             >
                                                 <Form.Group onClick={this.sttc137} className="d-flex h-20px">
-                                                    <Form.Control name='solder_model' type='radio' value="STTC 137" onChange={(e) => this.handlechange(e)} style={radiobtn} />
+                                                    <Form.Control required name='solder_model' type='radio' value="STTC 137 / 412°c" onChange={(e) => this.handlechange(e)} className="solder-radiobtn" />
                                                     <Form.Label className=" input-label ml-2">STTC 137</Form.Label>
                                                 </Form.Group>
                                             </OverlayTrigger>

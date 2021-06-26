@@ -63,8 +63,9 @@ export class Testerform extends Component {
             // this.props.history.push("/Testers");
         }
     }
-
     render() {
+        localStorage.setItem("operatorname", this.state.operator_name)
+        localStorage.setItem("stationid", this.state.Station)
         const { istesterform } = this.state
         if (istesterform === true) {
             return <Redirect to={
@@ -91,14 +92,14 @@ export class Testerform extends Component {
         const nameClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="OTA Tester Form" />
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="OTA Autonomous Maintenance" />
                 <div className=" bg-primary d-flex justify-content-center flex-column align-items-center" style={{ height: "90vh", width: "100%" }}>
                     <div className='d-flex justify-content-center h-75 w-75'>
                         <div className='h-100 w-50 '>
                             <img src={formImg} alt='formImg' className='h-100 w-100' />
                         </div>
                         <div data-aos="flip-left" data-aos-duration='3000' className='d-flex flex-column justify-content-center align-items-center h-100 w-50 glassCard bg-light' style={{ borderRadius: "0px" }}>
-                            <h3 className='text-center pb-4 '>OTA Tester</h3>
+                            <h3 className='form-title'>OTA Autonomous Maintenance</h3>
                             <div>
                                 <Form >
                                     <Form.Group className='d-sm-flex'>

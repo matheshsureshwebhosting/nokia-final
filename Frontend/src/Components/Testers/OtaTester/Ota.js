@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory,Redirect } from 'react-router'
+import { useHistory, Redirect } from 'react-router'
 import MasterCheckList from '../../../Pages/MasterCheckList/MasterCheckList'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
@@ -120,7 +120,7 @@ function Ota2() {
             })
     }
     const data = otaform
-    if (otaform === undefined) {        
+    if (otaform === undefined) {
         return <Redirect to="/otaform" />
     }
     return (
@@ -588,77 +588,70 @@ function Ota10() {
             return history.push("/otaform")
         }
         SweetAlert.fire({
-            title: 'Provide Following Details',
-            html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
-            showDenyButton: false,
-            showCancelButton: false,
+            title: 'OTA Autonomous Maintenance Completed Successfully',
+            // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
+            // showDenyButton: false,
+            // showCancelButton: false,
             confirmButtonText: `Save`,
         }).then((result) => {
             if (result.isConfirmed) {
-                const description = document.getElementById("des").value
-                if (description.length === 0) {
-                    SweetAlert.fire('Enter description', '', 'error')
-                    return false
+                otastatus["ota10"] = status
+                const newotastatus = Object.values(otastatus)
+                var finalstatus;
+                if (newotastatus.includes("No")) {
+                    finalstatus = "In Complete"
                 } else {
-                    otastatus["ota10"] = status
-                    const newotastatus = Object.values(otastatus)
-                    var finalstatus;
-                    if (newotastatus.includes("No")) {
-                        finalstatus = "In Complete"
-                    } else {
-                        finalstatus = "Complete"
-                    }
-                    const avg = newotastatus.filter(status => { return status === "No" })
-                    var finalavg
-                    if (avg.length === 0) {
-                        finalavg = '10 / 10'
-                    } else {
-                        finalavg = `${Number(10) - Number(avg.length)}/10`
-                    }
-                    const statuslists = []
-                    for (var i = 0; i < Object.keys(otastatus).length; i++) {
-                        if (Object.values(otastatus)[i] === "No") {
-                            statuslists.push(Object.keys(otastatus)[i])
-                        }
-                    }
-                    const datas = {
-                        date: otaform.date,
-                        station: otaform.Station,
-                        operator_name: otaform.operator_name,
-                        shift: otaform.shift,
-                        ota1: otastatus.Ota,
-                        ota2: otastatus.Ota2,
-                        ota3: otastatus.Ota3,
-                        ota4: otastatus.Ota4,
-                        ota5: otastatus.Ota5,
-                        ota6: otastatus.Ota6,
-                        ota7: otastatus.Ota7,
-                        ota8: otastatus.Ota8,
-                        ota9: otastatus.Ota9,
-                        ota10: status,
-                        Otatime1: otatime.Otatime,
-                        Otatime2: otatime.Ota2time,
-                        Otatime3: otatime.Ota3time,
-                        Otatime4: otatime.Ota4time,
-                        Otatime5: otatime.Ota5time,
-                        Otatime6: otatime.Ota6time,
-                        Otatime7: otatime.Ota7time,
-                        Otatime8: otatime.Ota8time,
-                        Otatime9: otatime.Ota9time,
-                        Otatime10: timer,
-                        description: description,
-                        status: finalstatus,
-                        avg: finalavg,
-                        statuslists: statuslists
-                    }                    
-                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/send`, datas).then((res) => {
-                        if (res.data === true) {
-                            history.push(nextPath)
-                        }
-                    }).catch((error) => {
-                        console.log(error)
-                    })
+                    finalstatus = "Complete"
                 }
+                const avg = newotastatus.filter(status => { return status === "No" })
+                var finalavg
+                if (avg.length === 0) {
+                    finalavg = '10 / 10'
+                } else {
+                    finalavg = `${Number(10) - Number(avg.length)}/10`
+                }
+                const statuslists = []
+                for (var i = 0; i < Object.keys(otastatus).length; i++) {
+                    if (Object.values(otastatus)[i] === "No") {
+                        statuslists.push(Object.keys(otastatus)[i])
+                    }
+                }
+                const datas = {
+                    date: otaform.date,
+                    station: otaform.Station,
+                    operator_name: otaform.operator_name,
+                    shift: otaform.shift,
+                    ota1: otastatus.Ota,
+                    ota2: otastatus.Ota2,
+                    ota3: otastatus.Ota3,
+                    ota4: otastatus.Ota4,
+                    ota5: otastatus.Ota5,
+                    ota6: otastatus.Ota6,
+                    ota7: otastatus.Ota7,
+                    ota8: otastatus.Ota8,
+                    ota9: otastatus.Ota9,
+                    ota10: status,
+                    Otatime1: otatime.Otatime,
+                    Otatime2: otatime.Ota2time,
+                    Otatime3: otatime.Ota3time,
+                    Otatime4: otatime.Ota4time,
+                    Otatime5: otatime.Ota5time,
+                    Otatime6: otatime.Ota6time,
+                    Otatime7: otatime.Ota7time,
+                    Otatime8: otatime.Ota8time,
+                    Otatime9: otatime.Ota9time,
+                    Otatime10: timer,
+                    status: finalstatus,
+                    avg: finalavg,
+                    statuslists: statuslists
+                }
+                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/send`, datas).then((res) => {
+                    if (res.data === true) {
+                        history.push(nextPath)
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                })
             }
         })
     }

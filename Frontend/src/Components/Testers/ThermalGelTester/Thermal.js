@@ -803,54 +803,46 @@ export function Thermal13() {
             return history.push("/thermalform")
         }
         SweetAlert.fire({
-            title: 'Provide Following Details',
-            html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
-            showDenyButton: false,
-            showCancelButton: false,
+            title: 'PVA Autonomous Maintenance Completed Successfully',
+            // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
+            // showDenyButton: false,
+            // showCancelButton: false,
             confirmButtonText: `Save`,
         }).then((result) => {
             if (result.isConfirmed) {
-                const description = document.getElementById("des").value
-                if (description.length === 0) {
-                    SweetAlert.fire('Enter description', '', 'error')
-                    return false
+                var finalstatus;
+                if (Object.values(thermalstatus).includes("No")) {
+                    finalstatus = "In Complete"
                 } else {
-                    var finalstatus;
-                    if (Object.values(thermalstatus).includes("No")) {
-                        finalstatus = "In Complete"
-                    } else {
-                        finalstatus = "Complete"
-                    }
-                    const datas = {
-                        date: thermalforms.date,
-                        station: thermalforms.Station,
-                        operator_name: thermalforms.operator_name,
-                        shift: thermalforms.shift,
-                        thermal1: thermalstatus.thermal1,
-                        thermal2: thermalstatus.thermal2,
-                        thermal3: thermalstatus.thermal3,
-                        thermal4: thermalstatus.thermal4,
-                        thermal5: thermalstatus.thermal5,
-                        thermal6: thermalstatus.thermal6,
-                        thermal7: thermalstatus.thermal7,
-                        thermal8: thermalstatus.thermal8,
-                        thermal9: thermalstatus.thermal9,
-                        thermal10: thermalstatus.thermal10,
-                        thermal11: thermalstatus.thermal11,
-                        thermal12: thermalstatus.thermal12,
-                        thermal13: status,
-                        description: description,
-                        status: finalstatus
-                    }
-                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
-                        if (res.data === true) {
-                        }
-                        history.push("/")
-                    }).catch((error) => {
-                        console.log(error)
-                    })
-
+                    finalstatus = "Complete"
                 }
+                const datas = {
+                    date: thermalforms.date,
+                    station: thermalforms.Station,
+                    operator_name: thermalforms.operator_name,
+                    shift: thermalforms.shift,
+                    thermal1: thermalstatus.thermal1,
+                    thermal2: thermalstatus.thermal2,
+                    thermal3: thermalstatus.thermal3,
+                    thermal4: thermalstatus.thermal4,
+                    thermal5: thermalstatus.thermal5,
+                    thermal6: thermalstatus.thermal6,
+                    thermal7: thermalstatus.thermal7,
+                    thermal8: thermalstatus.thermal8,
+                    thermal9: thermalstatus.thermal9,
+                    thermal10: thermalstatus.thermal10,
+                    thermal11: thermalstatus.thermal11,
+                    thermal12: thermalstatus.thermal12,
+                    thermal13: status,
+                    status: finalstatus
+                }
+                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
+                    if (res.data === true) {
+                    }
+                    history.push("/")
+                }).catch((error) => {
+                    console.log(error)
+                })
             }
         })
     }

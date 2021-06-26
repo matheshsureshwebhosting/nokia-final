@@ -25,16 +25,6 @@ function MasterCheckList(props) {
         document.getElementById("play").style.background = "darkblue"
         document.getElementById("pause").style.background = "darkblue"
     };
-
-
-
-
-
-
-
-
-
-
     return (
 
         <>

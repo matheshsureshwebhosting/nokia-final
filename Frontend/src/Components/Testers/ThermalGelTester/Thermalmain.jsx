@@ -8,7 +8,7 @@ export default class Thermalmain extends Component {
         return (
             <>
                 {/* Navbar */}
-                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Thermal Gel Machine Checklist" />
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Thermal Gel Machine Autonomous Maintenance" />
 
                 {/* Grid Menu Cards */}
                 <div className="d-flex justify-content-center align-items-center bg-primary flex-column h-100vh">
