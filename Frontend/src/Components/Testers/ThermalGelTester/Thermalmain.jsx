@@ -18,16 +18,16 @@ export default class Thermalmain extends Component {
                                 <img className='w-100 h-100' src="./images/tester/pva.png" alt='asytmek' />
                             </div>
                         </Link>
-                        <Link to="/uwaform" >
-                            <div className='grid-card bg-card mr-5 white fa-2x d-flex justify-content-center flex-column align-items-center'>
-                                <img className='w-100 h-100' src="./images/tester/asy.png" alt='asytmek' />
-                            </div>
-                        </Link>
-                        <Link to="/uwaform" >
-                            <div className='grid-card bg-card mr-5 white fa-2x d-flex justify-content-center flex-column align-items-center'>
-                                <img className='w-100 h-100' src="./images/tester/gel.png" alt='asytmek' />
-                            </div>
-                        </Link>
+                        {/* <Link to="/uwaform" > */}
+                        <div className='grid-card bg-card mr-5 white fa-2x d-flex justify-content-center flex-column align-items-center'>
+                            <img className='w-100 h-100' src="./images/tester/asy.png" alt='asytmek' />
+                        </div>
+                        {/* </Link> */}
+                        {/* <Link to="/uwaform" > */}
+                        <div className='grid-card bg-card mr-5 white fa-2x d-flex justify-content-center flex-column align-items-center'>
+                            <img className='w-100 h-100' src="./images/tester/gel.png" alt='asytmek' />
+                        </div>
+                        {/* </Link> */}
                     </div>
                 </div>
             </>

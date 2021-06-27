@@ -688,7 +688,7 @@ function Uwa10(props) {
             return history.push("/uwaform")
         }
         SweetAlert.fire({
-            title: 'UWA Autonomous Maintenance Completed Successfully',
+            title: 'AM for UWA Completed - Succesfully',
             // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
             // showDenyButton: false,
             // showCancelButton: false,

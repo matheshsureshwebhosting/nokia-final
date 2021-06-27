@@ -591,7 +591,7 @@ function Ota10() {
             return history.push("/otaform")
         }
         SweetAlert.fire({
-            title: 'OTA Autonomous Maintenance Completed Successfully',
+            title: 'AM for OTA Completed - Succesfully',
             // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
             // showDenyButton: false,
             // showCancelButton: false,

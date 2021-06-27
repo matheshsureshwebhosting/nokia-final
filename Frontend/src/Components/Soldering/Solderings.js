@@ -8,6 +8,7 @@ import solder2 from '../../assets/videos/soldering/s2.mp4'
 import solder3 from '../../assets/videos/soldering/s3.mp4'
 import SubmitButton from '../Utilities/Buttons/SubmitButton';
 import TitleButton from '../Utilities/Buttons/TitleButton';
+import Timer from '../../Container/Timer/Timer';
 export default class Solderings extends Component {
     constructor(props) {
         super(props)
@@ -25,13 +26,12 @@ export default class Solderings extends Component {
             counterTime: 0
         }
     }
+    // componentDidMount() {
 
-    componentDidMount() {
-        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
-    }
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    //     console.log(this.state)
+    //     console.log(cookieValue)
+    // }
+
     // ---------------------soldering tooltip select state-------------//
     _sttc117 = () => {
         this.setState({
@@ -131,10 +131,13 @@ export default class Solderings extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     submitbtn = (e, status) => {
+        const cookieValue = document.getElementById('demo').getAttribute('value');
+        this.setState({ counterTime: cookieValue })
         const { solder_model, temp, counterTime } = this.state
+        console.log(this.state)
         SweetAlert.fire({
             icon: 'success',
-            title: 'Soldering Tooltip Temperature Measure Recorded Successfully',
+            title: 'Soldering Tooltip Temperature Measurement Recorded Successfully',
             // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks... if you changed the cartridge please leave the message'></textarea>",
             // showDenyButton: false,
             // showCancelButton: false,
@@ -195,9 +198,10 @@ export default class Solderings extends Component {
         }
     }
 
+
     render() {
         // Button Status Switcher
-        const buttonStatus = this.state.counterTime > 5 ? false : true;
+        // const buttonStatus = this.state.counterTime > 5 ? false : true;
         const { temp } = this.state
 
         //-----------------tooltips-----------------//
@@ -345,7 +349,7 @@ export default class Solderings extends Component {
                     </div>
                     <div className='d-flex'>
                         <div className='data-title'>Time :</div>
-                        <div className='data-text'>{this.state.counterTime}Sec</div>
+                        <div className='data-text d-flex' id="demo"><Timer />Sec</div>
                     </div>
                 </div>
                 <div className='d-flex flex-column justify-content-center bg-primary' style={{ height: "100vh" }}>
@@ -496,7 +500,8 @@ export default class Solderings extends Component {
                                                 </Tooltip>
                                             }
                                         >
-                                            <SubmitButton disabled={buttonStatus} onClick={(e) => this.submitbtn(e, "Yes")} className='solderalert white soldering-submit-btn value={yes}' buttonName="Submit" />
+                                            {/* disabled={buttonStatus} */}
+                                            <SubmitButton onClick={(e) => this.submitbtn(e, "Yes")} className='solderalert white soldering-submit-btn value={yes}' buttonName="Submit" />
                                         </OverlayTrigger>
                                     </div>
                                 </div>

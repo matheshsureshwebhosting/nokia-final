@@ -807,7 +807,7 @@ export function Thermal13() {
             return history.push("/thermalform")
         }
         SweetAlert.fire({
-            title: 'PVA Autonomous Maintenance Completed Successfully',
+            title: 'AM for PVA Completed - Succesfully',
             // html: "<textarea style='margin-top:10px;border-radius: 0px !important;width: 100%; ' id='des' type='text' className='form-control' placeholder='Remarks'></textarea>",
             // showDenyButton: false,
             // showCancelButton: false,
