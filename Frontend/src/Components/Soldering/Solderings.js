@@ -26,11 +26,10 @@ export default class Solderings extends Component {
         }
     }
 
-    componentDidMount = () => {
-        const modal = this.modalShow
-        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1, modal }), 1000);
+    componentDidMount() {
+        this.interval = setInterval(() => this.setState({ counterTime: this.state.counterTime + 1 }), 1000);
     }
-    componentWillUnmount = () => {
+    componentWillUnmount() {
         clearInterval(this.interval);
     }
     // ---------------------soldering tooltip select state-------------//
@@ -176,10 +175,10 @@ export default class Solderings extends Component {
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp + 1 });
         if (temp <= tempA && temp >= tempB) {
-            this.setState({ error: true, modalShow: true });
+            this.setState({ error: false, error2: false });
         }
         else {
-            this.setState({ error: false, error2: false });
+            this.setState({ error: true, modalShow: true });
         }
     }
     decrement = () => {
@@ -188,11 +187,11 @@ export default class Solderings extends Component {
         const tempB = tempValid - 9;
         this.setState({ temp: this.state.temp - 1 });
         if ((temp <= tempA) && (temp >= tempB)) {
-            this.setState({ error: true, modalShow: true });
+            this.setState({ error: false, error2: false });
         }
         else {
             console.log("hi")
-            this.setState({ error: false, error2: false });
+            this.setState({ error: true, modalShow: true });
         }
     }
 

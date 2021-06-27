@@ -50,6 +50,8 @@ export class Thermalform extends Component {
 
 
     submitbtn = () => {
+        localStorage.setItem("stationId", this.state.Station)
+        localStorage.setItem("testerName", this.state.operator_name)
         const { Station, operator_name } = this.state
         if (Station.trim() === '') {
             this.setState({ stationError: true })

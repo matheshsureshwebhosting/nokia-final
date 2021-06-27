@@ -47,7 +47,7 @@ function Steps(props) {
                                     </Tooltip>
                                 }
                             >
-                                <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}> Enter The Pressure Guage Value:
+                                <div className="px-4  " style={{ fontWeight: "600" }}> Enter The Pressure Guage Value&nbsp;: &nbsp;&nbsp;
                                     <input autoFocus={true} type='text' className={`${props.error}` && "error-bg border-danger"} onChange={props.onChangeVacInput} name={props.name} placeholder={props.placeholder} value={props.value} />
                                 </div>
                             </OverlayTrigger>

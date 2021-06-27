@@ -6,9 +6,9 @@ import axios from 'axios';
 const otastatus = {}
 const otatime = {}
 var otaform;
-// const testerName = localStorage.getItem("testerName")
-// const stationId = localStorage.getItem("stationId")
 function Ota(props) {
+    const testerName = localStorage.getItem("testerName")
+    const stationId = localStorage.getItem("stationId")
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -29,6 +29,8 @@ function Ota(props) {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
+        localStorage.removeItem("testerName")
+        localStorage.removeItem("stationId")
         const { state } = props.location
         otaform = state
         if (otaform === undefined) {
@@ -63,6 +65,7 @@ function Ota(props) {
         <>
             <MasterCheckList
                 disabled={buttonStatus} TimeCounter={timer} progressCircle="true"
+                name={testerName} machineID={stationId}
                 count="10" progressValue="10" progressText="1 0f 10" TypeOfMedia="Video"
                 videosrc="./Images/OTA/1.mp4" onClick={onClick} alt="Ota"
                 uttonName="Next" link="/Ota2" />

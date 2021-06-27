@@ -21,7 +21,8 @@ import axios from 'axios';
 const thermalstatus = {}
 var thermalforms;
 export function Thermal(props) {
-
+    const testerName = localStorage.getItem("testerName")
+    const stationId = localStorage.getItem("stationId")
 
     const history = useHistory()
     const [timer, setTimer] = useState(0)
@@ -44,6 +45,8 @@ export function Thermal(props) {
     const buttonStatus = timer > 0 ? false : true;
 
     const onClick = (form, status, nextPath) => {
+        localStorage.removeItem("testerName")
+        localStorage.removeItem("stationId")
         const { state } = props.location
         thermalforms = {
             Station: state.Station,
@@ -81,6 +84,7 @@ export function Thermal(props) {
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer}
+                name={testerName} machineID={stationId}
                 disabled={buttonStatus} count="13" progressValue="7.69230769231"
                 progressText="1 0f 13" nameContinue='success' nameIssue='alert'
                 TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="thermal1"

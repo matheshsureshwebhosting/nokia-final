@@ -10,18 +10,26 @@ import list from '../../assets/img/list.png'
 import './Homes.css'
 import { Navbar } from '../Navbar/Navbar'
 import dashboardIcon from "../../assets/img/home/app-store.svg";
+import SweetAlert from "sweetalert2";
+
 function Home(props) {
   useEffect(() => {
     window.onbeforeunload = confirmExit;
     function confirmExit() {
-      return "show warning";
+      return SweetAlert.fire({
+        title: "checking process",
+        icon: "info",
+      })
     }
   }, [])
 
   const triggerThis = () => {
     window.onbeforeunload = confirmExit;
     function confirmExit() {
-      return "show message";
+      return SweetAlert.fire({
+        title: "OK Noted",
+        icon: "info",
+      })
     }
   }
 

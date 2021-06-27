@@ -7,6 +7,9 @@ const uwastatus = {}
 const uwatime = {}
 var uwaform;
 function Uwa(props) {
+    const testerName = localStorage.getItem("testerName")
+    const stationId = localStorage.getItem("stationId")
+
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -27,6 +30,8 @@ function Uwa(props) {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
+        localStorage.removeItem("testerName")
+        localStorage.removeItem("stationId")
         const { state } = props.location
         uwaform = state
         if (uwaform === undefined) {
@@ -66,6 +71,8 @@ function Uwa(props) {
                 progressText="1 0f 10"
                 TypeOfMedia="Video"
                 videosrc="./Images/Uwa/1.mp4"
+                name={testerName}
+                machineID={stationId}
                 alt="Uwa"
                 onClick={onClick}
                 buttonName="Next"
