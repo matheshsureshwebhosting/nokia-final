@@ -42,7 +42,7 @@ export function Thermal(props) {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
 
     const onClick = (form, status, nextPath) => {
         localStorage.removeItem("testerName")
@@ -111,7 +111,7 @@ export function Thermal2() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -171,7 +171,7 @@ export function Thermal3() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -230,7 +230,7 @@ export function Thermal4() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -289,7 +289,7 @@ export function Thermal5() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -348,7 +348,7 @@ export function Thermal6() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -409,7 +409,7 @@ export function Thermal7() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
 
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
@@ -505,7 +505,7 @@ export function Thermal8() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -564,7 +564,7 @@ export function Thermal9() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -623,7 +623,7 @@ export function Thermal10() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -682,7 +682,7 @@ export function Thermal11() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -741,7 +741,7 @@ export function Thermal12() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -801,7 +801,7 @@ export function Thermal13() {
         }, [delay]);
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
-    const buttonStatus = timer > 0 ? false : true;
+    const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")

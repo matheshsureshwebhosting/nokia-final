@@ -17,7 +17,7 @@ function Home(props) {
     window.onbeforeunload = confirmExit;
     function confirmExit() {
       return SweetAlert.fire({
-        title: "checking process",
+        title: "Testing process ...",
         icon: "info",
       })
     }
