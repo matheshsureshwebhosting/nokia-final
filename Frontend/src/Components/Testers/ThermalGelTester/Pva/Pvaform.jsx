@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Redirect } from 'react-router'
-import formImg from '../../../assets/img/home/formImg.gif'
-import SubmitButton from '../../Utilities/Buttons/SubmitButton'
-import { Navbar } from "../../Navbar/Navbar"
+import formImg from '../../../../assets/img/home/formImg.gif'
+import SubmitButton from '../../../Utilities/Buttons/SubmitButton'
+import { Navbar } from "../../../Navbar/Navbar"
 export class Thermalform extends Component {
     constructor(props) {
         super()
@@ -66,7 +66,7 @@ export class Thermalform extends Component {
         if (isthermalform === true) {
             return <Redirect to={
                 {
-                    pathname: "/thermalgel",
+                    pathname: "/pva",
                     state: this.state
                 }
             } />

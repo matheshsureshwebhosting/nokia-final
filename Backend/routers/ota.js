@@ -57,26 +57,50 @@ router.get("/export", async (req, res) => {
     var Excel = require('exceljs');
     var workbook = new Excel.Workbook();
 
-    const url = await workbook.xlsx.readFile("./templates/ota.xlsx")
+    const url = await workbook.xlsx.readFile("./templates/ota1.xlsx")
         .then(async function () {
             var worksheet = workbook.getWorksheet(1);
             for (var i = 0; i < data.length; i++) {
-                var row = await worksheet.getRow(Number(15) + Number(i));
+                var row = await worksheet.getRow(Number(22) + Number(i));
                 row.getCell(1).value = data[i].date;
-                row.getCell(2).value = data[i].shift;
-                row.getCell(3).value = data[i].checked_by;
-                row.getCell(4).value = data[i].ota1;
-                row.getCell(5).value = data[i].ota2;
-                row.getCell(6).value = data[i].ota3;
-                row.getCell(7).value = data[i].ota4;
-                row.getCell(8).value = data[i].ota5;
-                row.getCell(9).value = data[i].ota6;
-                row.getCell(10).value = data[i].ota7;
-                row.getCell(11).value = data[i].ota8;
-                row.getCell(12).value = data[i].ota9;
-                row.getCell(13).value = data[i].ota10;
-                row.getCell(14).value = data[i].description;
-                row.getCell(15).value = data[i].status;
+                row.getCell(2).value = data[i].shift;                
+                row.getCell(3).value = data[i].machine_Sl_No;
+
+                row.getCell(4).value = data[i].otatime1;
+                row.getCell(5).value = data[i].ota1;
+
+                row.getCell(6).value = data[i].otatime2;
+                row.getCell(7).value = data[i].ota2;
+
+                row.getCell(8).value = data[i].otatime3;
+                row.getCell(9).value = data[i].ota3;
+
+                row.getCell(10).value = data[i].otatime4;
+                row.getCell(11).value = data[i].ota4;
+
+                row.getCell(12).value = data[i].otatime5;
+                row.getCell(13).value = data[i].ota5;
+
+                row.getCell(14).value = data[i].otatime6;
+                row.getCell(15).value = data[i].ota6;
+                
+                row.getCell(16).value = data[i].otatime7;
+                row.getCell(17).value = data[i].ota7;
+
+                row.getCell(18).value = data[i].otatime8;
+                row.getCell(19).value = data[i].ota8;
+
+                row.getCell(20).value = data[i].otatime9;
+                row.getCell(21).value = data[i].ota9;
+
+                row.getCell(22).value = data[i].otatime10;
+                row.getCell(23).value = data[i].ota10;
+
+
+                row.getCell(24).value = data[i].checked_by;
+                row.getCell(25).value = data[i].description;
+                row.getCell(26).value = data[i].status;
+                row.getCell(27).value = data[i].average;
             }
 
             row.commit();

@@ -25,8 +25,8 @@ import { Uwa, Uwa2, Uwa3, Uwa4, Uwa5, Uwa6, Uwa7, Uwa8, Uwa9, Uwa10 } from './Co
 import { Spinner } from 'react-bootstrap';
 import Error from './Pages/ErrorPage/Error';
 import Testerform from './Components/Testers/Testerform';
-import { Thermal, Thermal2, Thermal3, Thermal4, Thermal5, Thermal6, Thermal7, Thermal8, Thermal9, Thermal10, Thermal11, Thermal12, Thermal13 } from './Components/Testers/ThermalGelTester/Thermal';
-import Thermalform from './Components/Testers/ThermalGelTester/Thermalform';
+import { Pva, Pva2, Pva3, Pva4, Pva5, Pva6, Pva7, Pva8, Pva9, Pva10, Pva11, Pva12, Pva13 } from './Components/Testers/ThermalGelTester/Pva/Pva';
+import Pvaform from './Components/Testers/ThermalGelTester/Pva/Pvaform';
 import OtaForm from "./Components/Testers/OtaTester/OtaForm"
 import UwaForm from "./Components/Testers/UwaTester/UwaForm"
 import Thermalmain from './Components/Testers/ThermalGelTester/Thermalmain';
@@ -67,50 +67,50 @@ export default class App extends Component {
                 <Route exact path="/Step7" component={Step7} />
                 <Route exact path="/Step8" component={Step8} />
                 <Route exact path="/Step9" component={Step9} />
-                <Route path="/vaccume" component={Vaccume} />
-                <Route path="/testerform" component={Testerform} />
-                <Route path="/Testers" component={Testers} />
+                <Route exact path="/vaccume" component={Vaccume} />
+                <Route exact path="/testerform" component={Testerform} />
+                <Route exact path="/Testers" component={Testers} />
 
                 {/* OTA checklist */}
-                <Route path="/otaform" component={OtaForm} />
-                <Route path="/OTA" component={Ota} />
-                <Route path="/Ota2" component={Ota2} />
-                <Route path="/Ota3" component={Ota3} />
-                <Route path="/Ota4" component={Ota4} />
-                <Route path="/Ota5" component={Ota5} />
-                <Route path="/Ota6" component={Ota6} />
-                <Route path="/Ota7" component={Ota7} />
-                <Route path="/Ota8" component={Ota8} />
-                <Route path="/Ota9" component={Ota9} />
-                <Route path="/Ota10" component={Ota10} />
+                <Route exact path="/otaform" component={OtaForm} />
+                <Route exact path="/OTA" component={Ota} />
+                <Route exact path="/Ota2" component={Ota2} />
+                <Route exact path="/Ota3" component={Ota3} />
+                <Route exact path="/Ota4" component={Ota4} />
+                <Route exact path="/Ota5" component={Ota5} />
+                <Route exact path="/Ota6" component={Ota6} />
+                <Route exact path="/Ota7" component={Ota7} />
+                <Route exact path="/Ota8" component={Ota8} />
+                <Route exact path="/Ota9" component={Ota9} />
+                <Route exact path="/Ota10" component={Ota10} />
                 {/* UWS Checklist */}
-                <Route path="/uwaform" component={UwaForm} />
-                <Route path="/UWA" component={Uwa} />
-                <Route path="/Uwa2" component={Uwa2} />
-                <Route path="/Uwa3" component={Uwa3} />
-                <Route path="/Uwa4" component={Uwa4} />
-                <Route path="/Uwa5" component={Uwa5} />
-                <Route path="/Uwa6" component={Uwa6} />
-                <Route path="/Uwa7" component={Uwa7} />
-                <Route path="/Uwa8" component={Uwa8} />
-                <Route path="/Uwa9" component={Uwa9} />
-                <Route path="/Uwa10" component={Uwa10} />
+                <Route exact path="/uwaform" component={UwaForm} />
+                <Route exact path="/UWA" component={Uwa} />
+                <Route exact path="/Uwa2" component={Uwa2} />
+                <Route exact path="/Uwa3" component={Uwa3} />
+                <Route exact path="/Uwa4" component={Uwa4} />
+                <Route exact path="/Uwa5" component={Uwa5} />
+                <Route exact path="/Uwa6" component={Uwa6} />
+                <Route exact path="/Uwa7" component={Uwa7} />
+                <Route exact path="/Uwa8" component={Uwa8} />
+                <Route exact path="/Uwa9" component={Uwa9} />
+                <Route exact path="/Uwa10" component={Uwa10} />
                 {/* Thermal Gel */}
-                <Route path="/thermalform" component={Thermalform} />
-                <Route path="/thermalgel" component={Thermal} />
-                <Route path="/thermal/step2" component={Thermal2} />
-                <Route path="/thermal/step3" component={Thermal3} />
-                <Route path="/thermal/step4" component={Thermal4} />
-                <Route path="/thermal/step5" component={Thermal5} />
-                <Route path="/thermal/step6" component={Thermal6} />
-                <Route path="/thermal/step7" component={Thermal7} />
-                <Route path="/thermal/step8" component={Thermal8} />
-                <Route path="/thermal/step9" component={Thermal9} />
-                <Route path="/thermal/step10" component={Thermal10} />
-                <Route path="/thermal/step11" component={Thermal11} />
-                <Route path="/thermal/step12" component={Thermal12} />
-                <Route path="/thermal/step13" component={Thermal13} />
-                <Route path="/thermalmain" component={Thermalmain} />
+                <Route exact path="/Pvaform" component={Pvaform} />
+                <Route exact path="/pva" component={Pva} />
+                <Route exact path="/pva/step2" component={Pva2} />
+                <Route exact path="/pva/step3" component={Pva3} />
+                <Route exact path="/pva/step4" component={Pva4} />
+                <Route exact path="/pva/step5" component={Pva5} />
+                <Route exact path="/pva/step6" component={Pva6} />
+                <Route exact path="/pva/step7" component={Pva7} />
+                <Route exact path="/pva/step8" component={Pva8} />
+                <Route exact path="/pva/step9" component={Pva9} />
+                <Route exact path="/pva/step10" component={Pva10} />
+                <Route exact path="/pva/step11" component={Pva11} />
+                <Route exact path="/pva/step12" component={Pva12} />
+                <Route exact path="/pva/step13" component={Pva13} />
+                <Route exact path="/thermalmain" component={Thermalmain} />
 
                 <Route path="*"><Error /></Route>
               </Switch>

@@ -16,6 +16,8 @@ import VaccumeTables from '../Tables/ReportTable/VaccumeTable';
 import UwaTables from '../Tables/ReportTable/UwaTable';
 import OtaTables from '../Tables/ReportTable/OtaTable';
 import SolderingTables from '../Tables/ReportTable/SolderingTable';
+import PvaTable from "../Tables/PvaTable/PvaTable"
+import PvaTables from "../Tables/ReportTable/PvaTable"
 
 function Dashboard() {
     const [showTable, setshowTable] = useState(0)
@@ -56,7 +58,7 @@ function Dashboard() {
                                 <li onClick={() => setshowreportTable(1)} >vacuum lifter</li>
                                 <li onClick={() => setshowreportTable(2)}>OTA</li>
                                 <li onClick={() => setshowreportTable(3)}>UWA</li>
-                                <li onClick={() => setshowreportTable(4)}>Thermal</li>
+                                <li onClick={() => setshowreportTable(4)}>PVA</li>
                             </ul>
                         </Accordion.Collapse>
                         <Accordion.Toggle as={Card.Header} eventKey="0" className='dashboard-menu-list' onClick={tablebtn}>
@@ -67,8 +69,8 @@ function Dashboard() {
                                 <li onClick={() => setshowTable(0)}>Solder tip temperature</li>
                                 <li onClick={() => setshowTable(1)}>vacuum lifter</li>
                                 <li onClick={() => setshowTable(2)}>OTA</li>
-                                <li onClick={() => setshowTable(3)}>UWA</li>
-                                <li onClick={() => setshowTable(4)}>Thermal</li>
+                                <li onClick={() => setshowTable(3)}>UWA</li>                            
+                                <li onClick={() => setshowTable(4)}>PVA</li>                            
                             </ul>
                         </Accordion.Collapse>
                     </Accordion>
@@ -104,10 +106,10 @@ function Dashboard() {
                     </div>
                     <div className="mt-5">
                         {
-                            table ? showTable === 0 ? <SolderTable /> : showTable === 1 ? <VacuumTable /> : showTable === 2 ? <OtaTable /> : showTable === 3 ? <UwaTable /> : showTable === 4 ? <ThermalTable /> : null : null
+                            table ? showTable === 0 ? <SolderTable /> : showTable === 1 ? <VacuumTable /> : showTable === 2 ? <OtaTable /> : showTable === 3 ? <UwaTable /> : showTable === 4 ? <PvaTable /> : null : null
                         }
                         {
-                            report ? showreportTable === 0 ? <SolderingTables /> : showreportTable === 1 ? <VaccumeTables /> : showreportTable === 2 ? <OtaTables /> : showreportTable === 3 ? <UwaTables /> : showreportTable === 4 ? <ThermalTables /> : null : null
+                            report ? showreportTable === 0 ? <SolderingTables /> : showreportTable === 1 ? <VaccumeTables /> : showreportTable === 2 ? <OtaTables /> : showreportTable === 3 ? <UwaTables /> : showreportTable === 4 ? <PvaTables /> : null : null
                         }
                     </div>
 

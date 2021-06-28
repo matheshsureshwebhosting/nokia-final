@@ -1,26 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
-import MasterCheckList from '../../../Pages/MasterCheckList/MasterCheckList'
-import video1 from '../../../assets/videos/PVA/1.mp4'
-import video2 from '../../../assets/videos/PVA/2.mp4'
-import video3 from '../../../assets/videos/PVA/3.mp4'
-import video4 from '../../../assets/videos/PVA/4.mp4'
-import video5 from '../../../assets/videos/PVA/5.mp4'
-import video6 from '../../../assets/videos/PVA/6.mp4'
-import video7 from '../../../assets/videos/PVA/7.mp4'
-import video8 from '../../../assets/videos/PVA/8.mp4'
-import video9 from '../../../assets/videos/PVA/9.mp4'
-import video10 from '../../../assets/videos/PVA/10.mp4'
-import video11 from '../../../assets/videos/PVA/11.mp4'
-import video12 from '../../../assets/videos/PVA/12.mp4'
-import video13 from '../../../assets/videos/PVA/13.mp4'
+import MasterCheckList from '../../../../Pages/MasterCheckList/MasterCheckList'
+import video1 from '../../../../assets/videos/PVA/1.mp4'
+import video2 from '../../../../assets/videos/PVA/2.mp4'
+import video3 from '../../../../assets/videos/PVA/3.mp4'
+import video4 from '../../../../assets/videos/PVA/4.mp4'
+import video5 from '../../../../assets/videos/PVA/5.mp4'
+import video6 from '../../../../assets/videos/PVA/6.mp4'
+import video7 from '../../../../assets/videos/PVA/7.mp4'
+import video8 from '../../../../assets/videos/PVA/8.mp4'
+import video9 from '../../../../assets/videos/PVA/9.mp4'
+import video10 from '../../../../assets/videos/PVA/10.mp4'
+import video11 from '../../../../assets/videos/PVA/11.mp4'
+import video12 from '../../../../assets/videos/PVA/12.mp4'
+import video13 from '../../../../assets/videos/PVA/13.mp4'
 
-import { useHistory } from 'react-router'
+import { useHistory, Redirect } from 'react-router'
 import SweetAlert from "sweetalert2";
 import axios from 'axios';
-
-const thermalstatus = {}
-var thermalforms;
-export function Thermal(props) {
+const pvatime = {}
+const pvastatus = {}
+var pvaform;
+export function Pva(props) {
 
 
     const history = useHistory()
@@ -43,17 +43,13 @@ export function Thermal(props) {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
 
-    const onClick = (form, status, nextPath) => {
+    const onClick = (form, status, nextPath) => {        
         const { state } = props.location
-        thermalforms = {
-            Station: state.Station,
-            date: state.date,
-            operator_name: state.operator_name,
-            shift: state.shift,
+        pvaform = state
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
-        }
+        console.log(form, status, nextPath);
         // if (status === 'Yes')
         //     SweetAlert.fire({
         //         title: "Data Submitted",
@@ -61,7 +57,8 @@ export function Thermal(props) {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -72,7 +69,8 @@ export function Thermal(props) {
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        thermalstatus[form] = status
+                        pvastatus[form] = status
+                        pvatime[`${form}time`] = timer
                         history.push(nextPath)
                     }
                 })
@@ -83,12 +81,12 @@ export function Thermal(props) {
             <MasterCheckList progressCircle="true" TimeCounter={timer}
                 disabled={buttonStatus} count="13" progressValue="7.69230769231"
                 progressText="1 0f 13" nameContinue='success' nameIssue='alert'
-                TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="thermal1"
-                link='/thermal/step2' />
+                TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="pva1"
+                link='/pva/step2' />
         </>
     )
 }
-export function Thermal2() {
+export function Pva2() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -109,9 +107,10 @@ export function Thermal2() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
-        }
+        console.log(form, status, nextPath);
+        // if (pvaform === undefined) {
+        //     return history.push("/Pvaform")
+        // }
         // if (status === 'Yes')
         //     SweetAlert.fire({
         //         title: "Data Submitted",
@@ -119,7 +118,8 @@ export function Thermal2() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -129,26 +129,27 @@ export function Thermal2() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13"
                 progressValue="15.3846153846" progressText="2 0f 13" TypeOfMedia="Video"
-                videosrc={video2} onClick={onClick} alt="thermal2" link='/thermal/step3' />
+                videosrc={video2} onClick={onClick} alt="pva2" link='/pva/step3' />
 
         </>
     )
 }
-export function Thermal3() {
+export function Pva3() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -169,8 +170,8 @@ export function Thermal3() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -179,7 +180,8 @@ export function Thermal3() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -189,25 +191,26 @@ export function Thermal3() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="23.0769230769"
-                progressText="3 0f 13" TypeOfMedia="Video" videosrc={video3} onClick={onClick} alt="thermal3"
-                link='/thermal/step4' />
+                progressText="3 0f 13" TypeOfMedia="Video" videosrc={video3} onClick={onClick} alt="pva3"
+                link='/pva/step4' />
         </>
     )
 }
-export function Thermal4() {
+export function Pva4() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -228,8 +231,8 @@ export function Thermal4() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -238,7 +241,8 @@ export function Thermal4() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -248,25 +252,26 @@ export function Thermal4() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="30.7692307692"
-                progressText="4 0f 13" TypeOfMedia="Video" videosrc={video4} onClick={onClick} alt="thermal4"
-                link='/thermal/step5' />
+                progressText="4 0f 13" TypeOfMedia="Video" videosrc={video4} onClick={onClick} alt="pva4"
+                link='/pva/step5' />
         </>
     )
 }
-export function Thermal5() {
+export function Pva5() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -287,8 +292,8 @@ export function Thermal5() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -297,7 +302,8 @@ export function Thermal5() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -307,25 +313,26 @@ export function Thermal5() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="38.4615384615"
-                progressText="5 0f 13" TypeOfMedia="Video" videosrc={video5} onClick={onClick} alt="thermal5"
-                link='/thermal/step6' />
+                progressText="5 0f 13" TypeOfMedia="Video" videosrc={video5} onClick={onClick} alt="pva5"
+                link='/pva/step6' />
         </>
     )
 }
-export function Thermal6() {
+export function Pva6() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -346,8 +353,8 @@ export function Thermal6() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -356,7 +363,8 @@ export function Thermal6() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -366,25 +374,26 @@ export function Thermal6() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="46.1538461539"
-                progressText="6 0f 13" TypeOfMedia="Video" videosrc={video6} onClick={onClick} alt="thermal6"
-                link='/thermal/step7' />
+                progressText="6 0f 13" TypeOfMedia="Video" videosrc={video6} onClick={onClick} alt="pva6"
+                link='/pva/step7' />
         </>
     )
 }
-export function Thermal7() {
+export function Pva7() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -405,8 +414,8 @@ export function Thermal7() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -415,7 +424,8 @@ export function Thermal7() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -425,27 +435,31 @@ export function Thermal7() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
+    }
+    const handleChange = (e) => {
+        pvaform["pressure_guage_value"] = e.target.value
     }
     return (
         <>
             <MasterCheckList
                 inputField="true"
-                progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
+                progressCircle="true" onChange={handleChange} TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="53.8461538462"
-                progressText="7 0f 13" TypeOfMedia="Video" videosrc={video7} onClick={onClick} alt="thermal7"
-                link='/thermal/step8' />
+                progressText="7 0f 13" TypeOfMedia="Video" videosrc={video7} onClick={onClick} alt="pva7"
+                link='/pva/step8' />
         </>
     )
 }
-export function Thermal8() {
+export function Pva8() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -466,8 +480,8 @@ export function Thermal8() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -476,7 +490,8 @@ export function Thermal8() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -486,25 +501,26 @@ export function Thermal8() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="61.5384615385"
-                progressText="8 0f 13" TypeOfMedia="Video" videosrc={video8} onClick={onClick} alt="thermal8"
-                link='/thermal/step9' />
+                progressText="8 0f 13" TypeOfMedia="Video" videosrc={video8} onClick={onClick} alt="pva8"
+                link='/pva/step9' />
         </>
     )
 }
-export function Thermal9() {
+export function Pva9() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -525,8 +541,8 @@ export function Thermal9() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -535,7 +551,8 @@ export function Thermal9() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -545,25 +562,26 @@ export function Thermal9() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="69.2307692308"
-                progressText="9 0f 13" TypeOfMedia="Video" videosrc={video9} onClick={onClick} alt="thermal9"
-                link='/thermal/step10' />
+                progressText="9 0f 13" TypeOfMedia="Video" videosrc={video9} onClick={onClick} alt="pva9"
+                link='/pva/step10' />
         </>
     )
 }
-export function Thermal10() {
+export function Pva10() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -584,8 +602,8 @@ export function Thermal10() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -594,7 +612,8 @@ export function Thermal10() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -604,25 +623,26 @@ export function Thermal10() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="76.9230769231"
-                progressText="10 0f 13" TypeOfMedia="Video" videosrc={video10} onClick={onClick} alt="thermal10"
-                link='/thermal/step11' />
+                progressText="10 0f 13" TypeOfMedia="Video" videosrc={video10} onClick={onClick} alt="pva10"
+                link='/pva/step11' />
         </>
     )
 }
-export function Thermal11() {
+export function Pva11() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -643,8 +663,8 @@ export function Thermal11() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -653,7 +673,8 @@ export function Thermal11() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -663,25 +684,26 @@ export function Thermal11() {
                 icon: "info",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    thermalstatus[form] = status
+                    pvastatus[form] = status
+                    pvatime[`${form}time`] = timer
                     history.push(nextPath)
                 }
             })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="84.6153846154"
-                progressText="11 0f 13" TypeOfMedia="Video" videosrc={video11} onClick={onClick} alt="thermal11"
-                link='/thermal/step12' />
+                progressText="11 0f 13" TypeOfMedia="Video" videosrc={video11} onClick={onClick} alt="pva11"
+                link='/pva/step12' />
         </>
     )
 }
-export function Thermal12() {
+export function Pva12() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -702,8 +724,8 @@ export function Thermal12() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         // if (status === 'Yes')
         //     SweetAlert.fire({
@@ -712,7 +734,8 @@ export function Thermal12() {
         //     })
         // .then((result) => {
         if (status === 'Yes') {
-            thermalstatus[form] = status
+            pvastatus[form] = status
+            pvatime[`${form}time`] = timer
             history.push(nextPath)
         }
         // })
@@ -723,25 +746,26 @@ export function Thermal12() {
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        thermalstatus[form] = status
+                        pvastatus[form] = status
+                        pvatime[`${form}time`] = timer
                         history.push(nextPath)
                     }
                 })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="92.3076923077"
-                progressText="12 0f 13" TypeOfMedia="Video" videosrc={video12} onClick={onClick} alt="thermal12"
-                link='/thermal/step13' />
+                progressText="12 0f 13" TypeOfMedia="Video" videosrc={video12} onClick={onClick} alt="pva12"
+                link='/pva/step13' />
         </>
     )
 }
-export function Thermal13() {
+export function Pva13() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
     function useInterval(callback, delay) {
@@ -762,8 +786,8 @@ export function Thermal13() {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
     const onClick = (form, status, nextPath) => {
-        if (thermalforms === undefined) {
-            return history.push("/thermalform")
+        if (pvaform === undefined) {
+            return history.push("/Pvaform")
         }
         SweetAlert.fire({
             title: 'AM for PVA Completed - Succesfully',
@@ -773,60 +797,91 @@ export function Thermal13() {
             confirmButtonText: `Save`,
         }).then((result) => {
             if (result.isConfirmed) {
-                const description = document.getElementById("des").value
-                if (description.length === 0) {
-                    SweetAlert.fire('Enter description', '', 'error')
-                    return false
+                // const description = document.getElementById("des").value
+                // if (description.length === 0) {
+                //     SweetAlert.fire('Enter description', '', 'error')
+                //     return false
+                // } else {
+                pvastatus["pva13"] = status
+                const newpvastatus = Object.values(pvastatus)
+                var finalstatus;
+                if (newpvastatus.includes("No")) {
+                    finalstatus = "In Complete"
                 } else {
-                    var finalstatus;
-                    if (Object.values(thermalstatus).includes("No")) {
-                        finalstatus = "In Complete"
-                    } else {
-                        finalstatus = "Complete"
-                    }
-                    const datas = {
-                        date: thermalforms.date,
-                        station: thermalforms.Station,
-                        operator_name: thermalforms.operator_name,
-                        shift: thermalforms.shift,
-                        thermal1: thermalstatus.thermal1,
-                        thermal2: thermalstatus.thermal2,
-                        thermal3: thermalstatus.thermal3,
-                        thermal4: thermalstatus.thermal4,
-                        thermal5: thermalstatus.thermal5,
-                        thermal6: thermalstatus.thermal6,
-                        thermal7: thermalstatus.thermal7,
-                        thermal8: thermalstatus.thermal8,
-                        thermal9: thermalstatus.thermal9,
-                        thermal10: thermalstatus.thermal10,
-                        thermal11: thermalstatus.thermal11,
-                        thermal12: thermalstatus.thermal12,
-                        thermal13: status,
-                        description: description,
-                        status: finalstatus
-                    }
-                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
-                        if (res.data === true) {
-                        }
-                        history.push("/")
-                    }).catch((error) => {
-                        console.log(error)
-                    })
-
+                    finalstatus = "Complete"
                 }
+                const avg = newpvastatus.filter(status => { return status === "No" })
+                var finalavg
+                if (avg.length === 0) {
+                    finalavg = '10 / 10'
+                } else {
+                    finalavg = `${Number(10) - Number(avg.length)}/10`
+                }
+                const statuslists = []
+                for (var i = 0; i < Object.keys(pvastatus).length; i++) {
+                    if (Object.values(pvastatus)[i] === "No") {
+                        statuslists.push(Object.keys(pvastatus)[i])
+                    }
+                }
+                const datas = {
+                    date: pvaform.date,
+                    station: pvaform.Station,
+                    operator_name: pvaform.operator_name,
+                    shift: pvaform.shift,
+                    pressure_guage_value:pvaform.pressure_guage_value,
+                    pva1: pvastatus.pva1,
+                    pva2: pvastatus.pva2,
+                    pva3: pvastatus.pva3,
+                    pva4: pvastatus.pva4,
+                    pva5: pvastatus.pva5,
+                    pva6: pvastatus.pva6,
+                    pva7: pvastatus.pva7,
+                    pva8: pvastatus.pva8,
+                    pva9: pvastatus.pva9,
+                    pva10: pvastatus.pva10,
+                    pva11: pvastatus.pva11,
+                    pva12: pvastatus.pva12,
+                    pva13: status,
+                    pvatime1: pvatime.pva1time,
+                    pvatime2: pvatime.pva2time,
+                    pvatime3: pvatime.pva3time,
+                    pvatime4: pvatime.pva4time,
+                    pvatime5: pvatime.pva5time,
+                    pvatime6: pvatime.pva6time,
+                    pvatime7: pvatime.pva7time,
+                    pvatime8: pvatime.pva8time,
+                    pvatime9: pvatime.pva9time,
+                    pvatime10: pvatime.pva10time,
+                    pvatime11: pvatime.pva11time,
+                    pvatime12: pvatime.pva12time,
+                    pvatime13: timer,
+                    description: "Not Provided",
+                    status: finalstatus,
+                    avg: finalavg,
+                    statuslists: statuslists
+                }                
+                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/Pva/send`, datas).then((res) => {
+                    if (res.data === true) {
+                    }
+                    history.push("/")    
+                }).catch((error) => {
+                    console.log(error)
+                })
+
             }
+            // }
         })
     }
-    const data = thermalforms
-    if (thermalforms === undefined) {
-        return history.push("/thermalform")
+    const data = pvaform
+    if (pvaform === undefined) {
+        return <Redirect to='/Pvaform' />
     }
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="100"
                 progressText="13 0f 13" okToComplete="true" TypeOfMedia="Video" videosrc={video13}
-                onClick={onClick} alt="thermal13" link='/' />
+                onClick={onClick} alt="pva13" link='/' />
         </>
     )
 }

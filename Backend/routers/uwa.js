@@ -62,22 +62,46 @@ router.get("/export", async (req, res) => {
         .then(async function () {
             var worksheet = workbook.getWorksheet(1);
             for (var i = 0; i < data.length; i++) {
-                var row = await worksheet.getRow(Number(15) + Number(i));
+                var row = await worksheet.getRow(Number(22) + Number(i));
                 row.getCell(1).value = data[i].date;
-                row.getCell(2).value = data[i].shift;
-                row.getCell(3).value = data[i].checked_by;
-                row.getCell(4).value = data[i].uwa1;
-                row.getCell(5).value = data[i].uwa2;
-                row.getCell(6).value = data[i].uwa3;
-                row.getCell(7).value = data[i].uwa4;
-                row.getCell(8).value = data[i].uwa5;
-                row.getCell(9).value = data[i].uwa6;
-                row.getCell(10).value = data[i].uwa7;
-                row.getCell(11).value = data[i].uwa8;
-                row.getCell(12).value = data[i].uwa9;
-                row.getCell(13).value = data[i].uwa10;
-                row.getCell(14).value = data[i].description;
-                row.getCell(15).value = data[i].status;
+                row.getCell(2).value = data[i].shift;                
+                row.getCell(3).value = data[i].machine_Sl_No;
+
+                row.getCell(4).value = data[i].uwatime1;
+                row.getCell(5).value = data[i].uwa1;
+
+                row.getCell(6).value = data[i].uwatime2;
+                row.getCell(7).value = data[i].uwa2;
+
+                row.getCell(8).value = data[i].uwatime3;
+                row.getCell(9).value = data[i].uwa3;
+
+                row.getCell(10).value = data[i].uwatime4;
+                row.getCell(11).value = data[i].uwa4;
+
+                row.getCell(12).value = data[i].uwatime5;
+                row.getCell(13).value = data[i].uwa5;
+
+                row.getCell(14).value = data[i].uwatime6;
+                row.getCell(15).value = data[i].uwa6;
+                
+                row.getCell(16).value = data[i].uwatime7;
+                row.getCell(17).value = data[i].uwa7;
+
+                row.getCell(18).value = data[i].uwatime8;
+                row.getCell(19).value = data[i].uwa8;
+
+                row.getCell(20).value = data[i].uwatime9;
+                row.getCell(21).value = data[i].uwa9;
+
+                row.getCell(22).value = data[i].uwatime10;
+                row.getCell(23).value = data[i].uwa10;
+
+
+                row.getCell(24).value = data[i].checked_by;
+                row.getCell(25).value = data[i].description;
+                row.getCell(26).value = data[i].status;
+                row.getCell(27).value = data[i].average;
             }
 
             row.commit();

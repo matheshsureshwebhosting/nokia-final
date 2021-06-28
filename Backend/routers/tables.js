@@ -61,19 +61,19 @@ uwatable = async () => {
 }
 
 
-thermaltable = async () => {
-    const thermaltable = new Promise(async (resolve, reject) => {
-        var sql = "CREATE TABLE thermaltable (date VARCHAR(255),machine_Sl_No VARCHAR(255),shift VARCHAR(255),checked_by VARCHAR(255), thermal1 VARCHAR(255), thermal2 VARCHAR(255), thermal3 VARCHAR(255), thermal4 VARCHAR(255), thermal5 VARCHAR(255), thermal6 VARCHAR(255), thermal7 VARCHAR(255), thermal8 VARCHAR(255), thermal9 VARCHAR(255),thermal10 VARCHAR(255),thermal11 VARCHAR(255),thermal12 VARCHAR(255),thermal13 VARCHAR(255),thermaltime1 VARCHAR(255), thermaltime2 VARCHAR(255), thermaltime3 VARCHAR(255), thermaltime4 VARCHAR(255), thermaltime5 VARCHAR(255), thermaltime6 VARCHAR(255), thermaltime7 VARCHAR(255), thermaltime8 VARCHAR(255), thermaltime9 VARCHAR(255),thermaltime10 VARCHAR(255),thermaltime11 VARCHAR(255),thermaltime12 VARCHAR(255),thermaltime13 VARCHAR(255),description VARCHAR(255),status VARCHAR(255),average VARCHAR(255),statuslists VARCHAR(255))";
+pvatable = async () => {
+    const pvatable = new Promise(async (resolve, reject) => {
+        var sql = "CREATE TABLE pvatable (date VARCHAR(255),machine_Sl_No VARCHAR(255),shift VARCHAR(255),checked_by VARCHAR(255),pressure_guage_value VARCHAR(255), pva1 VARCHAR(255), pva2 VARCHAR(255), pva3 VARCHAR(255), pva4 VARCHAR(255), pva5 VARCHAR(255), pva6 VARCHAR(255), pva7 VARCHAR(255), pva8 VARCHAR(255), pva9 VARCHAR(255),pva10 VARCHAR(255),pva11 VARCHAR(255),pva12 VARCHAR(255),pva13 VARCHAR(255),pvatime1 VARCHAR(255), pvatime2 VARCHAR(255), pvatime3 VARCHAR(255), pvatime4 VARCHAR(255), pvatime5 VARCHAR(255), pvatime6 VARCHAR(255), pvatime7 VARCHAR(255), pvatime8 VARCHAR(255), pvatime9 VARCHAR(255),pvatime10 VARCHAR(255),pvatime11 VARCHAR(255),pvatime12 VARCHAR(255),pvatime13 VARCHAR(255),description VARCHAR(255),status VARCHAR(255),average VARCHAR(255),statuslists VARCHAR(255))";
         await db.query(sql, function (err, result) {
             if (err) {
                 return resolve(err.sqlMessage)
             } else {
-                return resolve("Thermal Table Created")
+                return resolve("Pva Table Created")
             }
 
         });
     })
-    return await thermaltable
+    return await pvatable
 }
 
 router.get("/", async (req, res) => {
@@ -81,13 +81,13 @@ router.get("/", async (req, res) => {
     const solderingtables = await solderingtable()
     const otatables = await otatable()
     const uwatables = await uwatable()
-    const thermaltables = await thermaltable()
+    const pvatables = await pvatable()
     const tableres = {
         vaccumetable: vaccumetables,
         solderingtable: solderingtables,
         otatable: otatables,
         uwatable: uwatables,
-        thermaltable: thermaltables,
+        pvatable: pvatables,
     }
     return res.send(tableres)
 })

@@ -26,7 +26,7 @@ app.use("/ota", require("./routers/ota"))
 app.use("/uwa", require("./routers/uwa"))
 app.use("/soldering",require("./routers/soldering"))
 app.use("/vaccume",require("./routers/vaccume"))
-app.use("/thermal",require("./routers/thermal"))
+app.use("/pva",require("./routers/pva"))
 
 //invalid router
 app.get("*", (req, res) => {

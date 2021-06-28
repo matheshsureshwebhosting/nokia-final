@@ -13,7 +13,7 @@ export default class Thermalmain extends Component {
                 {/* Grid Menu Cards */}
                 <div className="d-flex justify-content-center align-items-center bg-primary flex-column h-100vh">
                     <div className="d-flex justify-content-center my-5">
-                        <Link to="/thermalform" >
+                        <Link to="/Pvaform" >
                             <div className='grid-card bg-card mr-5 white fa-2x d-flex justify-content-center flex-column align-items-center'>
                                 <img className='w-100 h-100' src="./images/tester/pva.png" alt='asytmek' />
                             </div>
