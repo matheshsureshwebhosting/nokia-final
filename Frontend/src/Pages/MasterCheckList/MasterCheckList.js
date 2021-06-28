@@ -25,6 +25,16 @@ function MasterCheckList(props) {
         document.getElementById("play").style.background = "darkblue"
         document.getElementById("pause").style.background = "darkblue"
     };
+
+
+
+
+
+
+
+
+
+
     return (
 
         <>
@@ -100,11 +110,12 @@ function MasterCheckList(props) {
                     }
                 >
                     <div className='d-flex'>
+
                         <button disabled={props.disabled} className="step-continue-btn" name={props.nameContinue} onClick={(e) => props.onClick(props.alt, "Yes", props.link)} >{props.okToComplete ? "Ok To Complete" : "Ok To Continue"}  <i className='fa fa-thumbs-up fa-2x mx-2' /></button>
                         <button disabled={props.disabled} className="raise-issue-btn" name={props.nameIsssue} onClick={(e) => props.onClick(props.alt, "No", props.link)} >Raise Issue<i className='fa fa-thumbs-down fa-2x mx-2' /></button>
                     </div>
                 </OverlayTrigger>
-                {props.inputField && <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}>Enter Pressure Guage Value: <input type='text' name={props.InputName} onChange={props.onChangeInput} placeholder={props.placeholder} value={props.value} className={`${props.errorState}` && "error-bg border-warning"} /></div>}
+                {props.inputField && <div className="px-4" style={{ fontSize: "1.25rem", fontWeight: "600" }}>Enter Pressure Guage Value: <input type='text' onChange={props.onChange} placeholder={props.placeholder} value={props.value} /></div>}
             </div>
         </>
     )

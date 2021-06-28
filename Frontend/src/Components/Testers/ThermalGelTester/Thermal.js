@@ -21,8 +21,7 @@ import axios from 'axios';
 const thermalstatus = {}
 var thermalforms;
 export function Thermal(props) {
-    const testerName = localStorage.getItem("testerName")
-    const stationId = localStorage.getItem("stationId")
+
 
     const history = useHistory()
     const [timer, setTimer] = useState(0)
@@ -45,8 +44,6 @@ export function Thermal(props) {
     const buttonStatus = timer > 5 ? false : true;
 
     const onClick = (form, status, nextPath) => {
-        localStorage.removeItem("testerName")
-        localStorage.removeItem("stationId")
         const { state } = props.location
         thermalforms = {
             Station: state.Station,
@@ -84,7 +81,6 @@ export function Thermal(props) {
     return (
         <>
             <MasterCheckList progressCircle="true" TimeCounter={timer}
-                name={testerName} machineID={stationId}
                 disabled={buttonStatus} count="13" progressValue="7.69230769231"
                 progressText="1 0f 13" nameContinue='success' nameIssue='alert'
                 TypeOfMedia="Video" videosrc={video1} onClick={onClick} alt="thermal1"
@@ -391,8 +387,6 @@ export function Thermal6() {
 export function Thermal7() {
     const history = useHistory()
     const [timer, setTimer] = useState(0)
-    const [pressureValue, setPressureValue] = useState("")
-    const [error, setError] = useState("")
     function useInterval(callback, delay) {
         const savedCallback = useRef();
         // Remember the latest callback.
@@ -410,7 +404,6 @@ export function Thermal7() {
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
-
     const onClick = (form, status, nextPath) => {
         if (thermalforms === undefined) {
             return history.push("/thermalform")
@@ -421,42 +414,12 @@ export function Thermal7() {
         //         icon: "success",
         //     })
         // .then((result) => {
-        if (pressureValue === "") {
-            SweetAlert.fire({
-                title: "Please enter the pressure guage value",
-                icon: "warning",
-            })
-            setError("true")
-        }
-        if (status === 'No' || !(pressureValue < 49) || !(pressureValue > 70))
-            SweetAlert.fire({
-                title: "Value Should be 50 To 70 PSI",
-                icon: "warning",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    thermalstatus[form] = status
-                    history.push(nextPath)
-                }
-            })
-        if (status === 'Yes' || !(pressureValue < 49) || !(pressureValue > 70))
-            SweetAlert.fire({
-                title: "Value Should be 50 To 70 PSI",
-                icon: "warning",
-            })
-        // if (pressureValue.NaN) {
-        //     SweetAlert.fire({
-        //         title: "Please enter the pressure guage value in number",
-        //         icon: "warning",
-        //     })
-        //     setError("true")
-        // }
-        // if (status === 'No' && Number(pressureValue) < 400 && Number(pressureValue) > 600)
-        if (status === 'Yes' && pressureValue !== "") {
+        if (status === 'Yes') {
             thermalstatus[form] = status
             history.push(nextPath)
         }
         // })
-        if (status === 'No' && pressureValue !== "")
+        if (status === 'No')
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
@@ -469,15 +432,11 @@ export function Thermal7() {
     }
     const data = thermalforms
     if (thermalforms === undefined) {
-        return history.replace("/thermalform")
+        return history.push("/thermalform")
     }
     return (
         <>
             <MasterCheckList
-                InputName="pressure_guage_value"
-                placeholder="50 to 70 PSI"
-                errorState={error}
-                onChangeInput={e => setPressureValue(e.target.value)}
                 inputField="true"
                 progressCircle="true" TimeCounter={timer} disabled={buttonStatus}
                 name={data.operator_name} machineID={data.Station} count="13" progressValue="53.8461538462"
@@ -814,39 +773,47 @@ export function Thermal13() {
             confirmButtonText: `Save`,
         }).then((result) => {
             if (result.isConfirmed) {
-                var finalstatus;
-                if (Object.values(thermalstatus).includes("No")) {
-                    finalstatus = "In Complete"
+                const description = document.getElementById("des").value
+                if (description.length === 0) {
+                    SweetAlert.fire('Enter description', '', 'error')
+                    return false
                 } else {
-                    finalstatus = "Complete"
-                }
-                const datas = {
-                    date: thermalforms.date,
-                    station: thermalforms.Station,
-                    operator_name: thermalforms.operator_name,
-                    shift: thermalforms.shift,
-                    thermal1: thermalstatus.thermal1,
-                    thermal2: thermalstatus.thermal2,
-                    thermal3: thermalstatus.thermal3,
-                    thermal4: thermalstatus.thermal4,
-                    thermal5: thermalstatus.thermal5,
-                    thermal6: thermalstatus.thermal6,
-                    thermal7: thermalstatus.thermal7,
-                    thermal8: thermalstatus.thermal8,
-                    thermal9: thermalstatus.thermal9,
-                    thermal10: thermalstatus.thermal10,
-                    thermal11: thermalstatus.thermal11,
-                    thermal12: thermalstatus.thermal12,
-                    thermal13: status,
-                    status: finalstatus
-                }
-                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
-                    if (res.data === true) {
+                    var finalstatus;
+                    if (Object.values(thermalstatus).includes("No")) {
+                        finalstatus = "In Complete"
+                    } else {
+                        finalstatus = "Complete"
                     }
-                    history.push("/")
-                }).catch((error) => {
-                    console.log(error)
-                })
+                    const datas = {
+                        date: thermalforms.date,
+                        station: thermalforms.Station,
+                        operator_name: thermalforms.operator_name,
+                        shift: thermalforms.shift,
+                        thermal1: thermalstatus.thermal1,
+                        thermal2: thermalstatus.thermal2,
+                        thermal3: thermalstatus.thermal3,
+                        thermal4: thermalstatus.thermal4,
+                        thermal5: thermalstatus.thermal5,
+                        thermal6: thermalstatus.thermal6,
+                        thermal7: thermalstatus.thermal7,
+                        thermal8: thermalstatus.thermal8,
+                        thermal9: thermalstatus.thermal9,
+                        thermal10: thermalstatus.thermal10,
+                        thermal11: thermalstatus.thermal11,
+                        thermal12: thermalstatus.thermal12,
+                        thermal13: status,
+                        description: description,
+                        status: finalstatus
+                    }
+                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/thermal/send`, datas).then((res) => {
+                        if (res.data === true) {
+                        }
+                        history.push("/")
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+
+                }
             }
         })
     }

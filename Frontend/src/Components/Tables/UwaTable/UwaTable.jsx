@@ -127,50 +127,85 @@ export default class UwaTable extends Component {
                             </select>
                         </div>
                     </div>
+                 
                     <Table striped bordered hover size="sm" responsive="sm">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Shift </th>
-                                <th>UWA1</th>
-                                <th>UWA2</th>
-                                <th>UWA3</th>
-                                <th>UWA4</th>
-                                <th>UWA5</th>
-                                <th>UWA6</th>
-                                <th>UWA7</th>
-                                <th>UWA8</th>
-                                <th>UWA9</th>
-                                <th>UWA10</th>
-                                <th>Checked by</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                uwa && uwa.map((uwainfo, index) => (
-                                    <tr key={index}>
-                                        <td>{uwainfo.date}</td>
-                                        <td>{uwainfo.shift}</td>
-                                       <td>{uwainfo.uwa1}</td>
-                                       <td>{uwainfo.uwa2}</td>
-                                       <td>{uwainfo.uwa3}</td>
-                                       <td>{uwainfo.uwa4}</td>
-                                       <td>{uwainfo.uwa5}</td>
-                                       <td>{uwainfo.uwa6}</td>
-                                       <td>{uwainfo.uwa7}</td>
-                                       <td>{uwainfo.uwa8}</td>
-                                       <td>{uwainfo.uwa9}</td>
-                                       <td>{uwainfo.uwa10}</td>
-                                        <td>{uwainfo.checked_by}</td>
-                                        <td>{uwainfo.description}</td>
-                                        <td>{uwainfo.status}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                            <thead>
+                                <tr>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
+                                    {/* <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th> */}
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
+                                    <th className="tg-54sw text-center " colSpan="18">Status</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA1</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA2</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA3</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA4</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA5</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA6</td>
+                                    <td className="tg-54sw text-center" colSpan="2">UWA7</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">UWA8</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">UWA9</td>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {  uwa && uwa.map((uwainfo, index) => (
+                                        <tr key={index}>
+                                            <td className="tg-za14">{uwainfo.date}</td>
+                                            <td className="tg-za14">{uwainfo.shift}</td>
+                                            <td className="tg-za14"> {uwainfo.machine_Sl_No}</td>
+                                            {/* <td className="tg-za14"> {uwainfo.pressure_guage_value}</td> */}
+                                            <td className="tg-za14"> {uwainfo.checked_by}</td>                                           
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime1}</td>
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwa1}</td>  
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime2}</td>                                         
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwa2} </td>  
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime3}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {uwainfo.uwa3}</td>   
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime4}</td>                                        
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwa4} </td>   
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime5}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {uwainfo.uwa5}</td> 
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime6}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{uwainfo.uwa6} </td>   
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime7}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{uwainfo.uwa7} </td>  
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime8}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{uwainfo.uwa8} </td>   
+                                            <td className="tg-za14" colSpan="1">{uwainfo.uwatime9}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{uwainfo.uwa9} </td>
+                                            <td className="tg-7zrl">{uwainfo.description}</td>
+                                            <td className="tg-7zrl">{uwainfo.status}</td>
+                                        </tr>
+                                    )) 
+                                }
+
+                            </tbody>
+                        </Table>
                     {
                         uwa !== null ? uwa.length === 0 ? <div className="text-center">No data</div> : null : null
                     }

@@ -90,6 +90,7 @@ export default class OtaTable extends Component {
     }
     render() {
         const { ota } = this.state
+        console.log(ota)
         return (
             <>
                 <div className='p-3 container-fluid'>
@@ -125,50 +126,85 @@ export default class OtaTable extends Component {
                             </select>
                         </div>
                     </div>
-                    <Table striped bordered hover size="sm" responsive="sm">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Shift </th>
-                                <th>OTA1</th>
-                                <th>OTA2</th>
-                                <th>OTA3</th>
-                                <th>OTA4</th>
-                                <th>OTA5</th>
-                                <th>OTA6</th>
-                                <th>OTA7</th>
-                                <th>OTA8</th>
-                                <th>OTA9</th>
-                                <th>OTA10</th>
-                                <th>Checked by</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                ota && ota.map((otainfo, index) => (
-                                    <tr key={index}>
-                                        <td>{otainfo.date}</td>
-                                        <td>{otainfo.shift}</td>
-                                       <td>{otainfo.ota1}</td>
-                                       <td>{otainfo.ota2}</td>
-                                       <td>{otainfo.ota3}</td>
-                                       <td>{otainfo.ota4}</td>
-                                       <td>{otainfo.ota5}</td>
-                                       <td>{otainfo.ota6}</td>
-                                       <td>{otainfo.ota7}</td>
-                                       <td>{otainfo.ota8}</td>
-                                       <td>{otainfo.ota9}</td>
-                                       <td>{otainfo.ota10}</td>
-                                        <td>{otainfo.checked_by}</td>
-                                        <td>{otainfo.description}</td>
-                                        <td>{otainfo.status}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                  
+                      <Table striped bordered hover size="sm" id="ota2" responsive="sm">
+                            <thead>
+                                <tr>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
+                                    {/* <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th> */}
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
+                                    <th className="tg-54sw text-center " colSpan="18">Status</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA1</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA2</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA3</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA4</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA5</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA6</td>
+                                    <td className="tg-54sw text-center" colSpan="2">OTA7</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">OTA8</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">OTA9</td>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {  ota && ota.map((otainfo, index) => (
+                                        <tr key={index}>
+                                            <td className="tg-za14">{otainfo.date}</td>
+                                            <td className="tg-za14">{otainfo.shift}</td>
+                                            <td className="tg-za14"> {otainfo.machine_Sl_No}</td>
+                                            {/* <td className="tg-za14"> {otainfo.pressure_guage_value}</td> */}
+                                            <td className="tg-za14"> {otainfo.checked_by}</td>                                           
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime1}</td>
+                                            <td className="tg-za14" colSpan="1">{otainfo.ota1}</td>  
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime2}</td>                                         
+                                            <td className="tg-za14" colSpan="1">{otainfo.ota2} </td>  
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime3}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {otainfo.ota3}</td>   
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime4}</td>                                        
+                                            <td className="tg-za14" colSpan="1">{otainfo.ota4} </td>   
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime5}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {otainfo.ota5}</td> 
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime6}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{otainfo.ota6} </td>   
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime7}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{otainfo.ota7} </td>  
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime8}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{otainfo.ota8} </td>   
+                                            <td className="tg-za14" colSpan="1">{otainfo.Otatime9}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{otainfo.ota9} </td>
+                                            <td className="tg-7zrl">{otainfo.description}</td>
+                                            <td className="tg-7zrl">{otainfo.status}</td>
+                                        </tr>
+                                    )) 
+                                }
+
+                            </tbody>
+                        </Table>
                     {
                         ota !== null ? ota.length === 0 ? <div className="text-center">No data</div> : null : null
                     }

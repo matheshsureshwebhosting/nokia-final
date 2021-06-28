@@ -86,7 +86,7 @@ export class VacuumForm extends Component {
         const nameInputClass = nameError ? 'w-50 text-uppercase border border-danger error-bg' : 'w-50 text-uppercase';
         return (
             <>
-                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Vacuum Lifter Autonomous Maintenance" />
+                <Navbar logo="NOKIA" subTitle="Digital WorkStation" title="Vacuum Lifter Maintenance Form" />
 
                 <div className=" bg-primary d-flex justify-content-center flex-column align-items-center h-90" style={{ width: "100%" }}>
                     <div className='d-flex justify-content-center h-auto w-75'>
@@ -94,7 +94,7 @@ export class VacuumForm extends Component {
                             <img src={formImg} alt='formImg' className='h-100 w-100' loop={true} />
                         </div>
                         <div data-aos="flip-left" data-aos-duration='3000' className='d-flex flex-column justify-content-center align-items-center h-100 w-50 glassCard bg-light' style={{ borderRadius: "0px" }}>
-                            <h3 className='form-title'>Vacuum Lifter Autonomous <br />Maintenance</h3>
+                            <h3 className='text-center pb-4'>Vacuum Lifter Maintenance</h3>
                             <Form>
                                 <Form.Group className='d-flex justify-content-between'><Form.Label className='text-left pt-1 input-label w-50'>Time:</Form.Label> <Form.Control className="date-time  w-50" type="text" name={dateTime} value={dateTime} disabled required onChange={(e) => this.handleChange(e)}></Form.Control> </Form.Group>
                                 <OverlayTrigger

@@ -45,7 +45,7 @@ export default class OtaTable extends Component {
         return (
             <>
                 <h3 className='text-center mb-4 text-dark' style={{ marginBottom: "10px !important" }}>Testers Checklist OTA</h3>
-                <Table striped bordered hover dir="ltr" border="1" cellSpacing="0" cellPadding="0"><colgroup><col width="100" /><col width="100" /><col width="128" /><col width="100" /><col width="100" /><col width="117" /><col width="100" /></colgroup>
+                <Table striped bordered hover dir="ltr" id="reports" border="1" cellSpacing="0" cellPadding="0"><colgroup><col width="100" /><col width="100" /><col width="128" /><col width="100" /><col width="100" /><col width="117" /><col width="100" /></colgroup>
                     <tbody>
                         <tr style={{ height: "24px", backgroundColor: "#124191", color: "#fff" }}>
                             <td style={{ height: "24px", textAlign: "center" }} data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Date&quot;}">Date</td>

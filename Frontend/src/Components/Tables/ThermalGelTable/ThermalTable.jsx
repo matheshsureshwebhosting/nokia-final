@@ -125,56 +125,105 @@ export default class ThermalTable extends Component {
                             </select>
                         </div>
                     </div>
-                    <Table striped bordered hover size="sm" responsive="sm">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Shift </th>
-                                <th>Thermal1</th>
-                                <th>Thermal2</th>
-                                <th>Thermal3</th>
-                                <th>Thermal4</th>
-                                <th>Thermal5</th>
-                                <th>Thermal6</th>
-                                <th>Thermal7</th>
-                                <th>Thermal8</th>
-                                <th>Thermal9</th>
-                                <th>Thermal10</th>
-                                <th>Thermal11</th>
-                                <th>Thermal12</th>
-                                <th>Thermal13</th>
-                                <th>Checked by</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                thermal && thermal.map((thermalinfo, index) => (
-                                    <tr key={index}>
-                                        <td>{thermalinfo.date}</td>
-                                        <td>{thermalinfo.shift}</td>
-                                        <td>{thermalinfo.thermal1}</td>
-                                        <td>{thermalinfo.thermal2}</td>
-                                        <td>{thermalinfo.thermal3}</td>
-                                        <td>{thermalinfo.thermal4}</td>
-                                        <td>{thermalinfo.thermal5}</td>
-                                        <td>{thermalinfo.thermal6}</td>
-                                        <td>{thermalinfo.thermal7}</td>
-                                        <td>{thermalinfo.thermal8}</td>
-                                        <td>{thermalinfo.thermal9}</td>
-                                        <td>{thermalinfo.thermal10}</td>
-                                        <td>{thermalinfo.thermal11}</td>
-                                        <td>{thermalinfo.thermal12}</td>
-                                        <td>{thermalinfo.thermal13}</td>
-                                        <td>{thermalinfo.checked_by}</td>
-                                        <td>{thermalinfo.description}</td>
-                                        <td>{thermalinfo.status}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                
+                      <Table striped bordered hover size="sm" responsive="sm">
+                            <thead>
+                                <tr>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
+                                    <th className="tg-54sw text-center " colSpan="26">Status</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal1</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal2</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal3</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal4</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal5</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal6</td>
+                                    <td className="tg-54sw text-center" colSpan="2">Thermal7</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal8</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal9</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal10</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal11</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal12</td>
+                                    <td className="tg-2g1l text-center" colSpan="2">Thermal13</td>
+                                </tr>
+                                <tr>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {   thermal && thermal.map((thermalinfo, index) => (
+                                        <tr key={index}>
+                                            <td className="tg-za14">{thermalinfo.date}</td>
+                                            <td className="tg-za14">{thermalinfo.shift}</td>
+                                            <td className="tg-za14"> {thermalinfo.machine_Sl_No}</td>
+                                            <td className="tg-za14"> {thermalinfo.pressure_guage_value}</td>
+                                            <td className="tg-za14"> {thermalinfo.checked_by}</td>                                           
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime1}</td>
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermal1}</td>  
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime2}</td>                                         
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermal2} </td>  
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime3}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {thermalinfo.thermal3}</td>   
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime4}</td>                                        
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermal4} </td>   
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime5}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {thermalinfo.thermal5}</td> 
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime6}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal6} </td>   
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime7}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal7} </td>  
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime8}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal8}</td>   
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime9}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal9} </td>
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime10}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal10} </td>
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime11}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal11} </td>
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime12}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal12} </td>
+                                            <td className="tg-za14" colSpan="1">{thermalinfo.thermaltime13}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{thermalinfo.thermal13} </td>
+                                            <td className="tg-7zrl">{thermalinfo.description}</td>
+                                            <td className="tg-7zrl">{thermalinfo.status}</td>
+                                        </tr>
+                                    )) 
+                                }
+
+                            </tbody>
+                        </Table>
                     {
                         thermal !== null ? thermal.length === 0 ? <div className="text-center">No data</div> : null : null
                     }

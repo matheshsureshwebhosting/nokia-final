@@ -37,9 +37,7 @@ const NewDashboard = React.lazy(() => import('./Components/DashboardNew/Dashboar
 const Vaccume = React.lazy(() => import('./Components/Steps/Vaccume'))
 
 export default class App extends Component {
-
   render() {
-
     AOS.init();
     return (
       <>

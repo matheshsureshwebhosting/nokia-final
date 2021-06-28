@@ -60,22 +60,43 @@ router.get("/export", async (req, res) => {
         .then(async function () {
             var worksheet = workbook.getWorksheet(1);
             for (var i = 0; i < data.length; i++) {
-                var row = await worksheet.getRow(Number(21) + Number(i));
+                var row = await worksheet.getRow(Number(22) + Number(i));
                 row.getCell(1).value = data[i].date;
                 row.getCell(2).value = data[i].shift;
-                row.getCell(3).value = data[i].machine_Sl_No;
-                row.getCell(4).value = data[i].process1_result;
-                row.getCell(5).value = data[i].process2_result;
-                row.getCell(6).value = data[i].process3_result;
-                row.getCell(7).value = data[i].process4_result;
-                row.getCell(8).value = data[i].process5_result;
-                row.getCell(9).value = data[i].process6_result;
-                row.getCell(10).value = data[i].process7_result;
-                row.getCell(11).value = data[i].process8_result;
-                row.getCell(12).value = data[i].process9_result;
-                row.getCell(13).value = data[i].checked_by;
-                row.getCell(14).value = data[i].description;
-                row.getCell(15).value = data[i].status;
+                row.getCell(3).value = data[i].pressure_guage_value;
+                row.getCell(4).value = data[i].machine_Sl_No;
+
+                row.getCell(5).value = data[i].process1_time;
+                row.getCell(6).value = data[i].process1_result;
+
+                row.getCell(7).value = data[i].process2_time;
+                row.getCell(8).value = data[i].process2_result;
+
+                row.getCell(9).value = data[i].process3_time;
+                row.getCell(10).value = data[i].process3_result;
+
+                row.getCell(11).value = data[i].process4_time;
+                row.getCell(12).value = data[i].process4_result;
+
+                row.getCell(13).value = data[i].process5_time;
+                row.getCell(14).value = data[i].process5_result;
+
+                row.getCell(15).value = data[i].process6_time;
+                row.getCell(16).value = data[i].process6_result;
+                
+                row.getCell(17).value = data[i].process7_time;
+                row.getCell(18).value = data[i].process7_result;
+
+                row.getCell(19).value = data[i].process8_time;
+                row.getCell(20).value = data[i].process8_result;
+
+                row.getCell(21).value = data[i].process9_time;
+                row.getCell(22).value = data[i].process9_result;
+
+                row.getCell(23).value = data[i].checked_by;
+                row.getCell(24).value = data[i].description;
+                row.getCell(25).value = data[i].status;
+                row.getCell(26).value = data[i].average;
             }
 
             row.commit();

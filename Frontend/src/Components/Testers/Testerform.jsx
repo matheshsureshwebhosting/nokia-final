@@ -50,8 +50,6 @@ export class Testerform extends Component {
 
 
     submitbtn = () => {
-        localStorage.setItem("stationId", this.state.Station)
-        localStorage.setItem("testerName", this.state.operator_name)
         const { Station, operator_name } = this.state
         if (Station.trim() === '') {
             this.setState({ stationError: true })
@@ -93,7 +91,7 @@ export class Testerform extends Component {
                             <img src={formImg} alt='formImg' className='h-100 w-100' />
                         </div>
                         <div data-aos="flip-left" data-aos-duration='3000' className='d-flex flex-column justify-content-center align-items-center h-100 w-50 glassCard bg-light' style={{ borderRadius: "0px" }}>
-                            <h3 className='form-title '>Tester Autonomous Maintenance</h3>
+                            <h3 className='text-center pb-4 '>Tester</h3>
                             <div>
                                 <Form >
                                     <Form.Group className='d-sm-flex'>

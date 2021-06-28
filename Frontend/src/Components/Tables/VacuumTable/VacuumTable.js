@@ -75,13 +75,13 @@ export default class VacuumTable extends Component {
         })
         window.open(exportvaccume)
     }
-    statusfilter=async(e)=>{
+    statusfilter = async (e) => {
         const status = e.target.value
-        const statusdata =  await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume`).then((res) => {
+        const statusdata = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume`).then((res) => {
             return res.data
         })
         if (status !== "none") {
-            const filterstatus = await statusdata.filter((statuss, index) => { return statuss.status === status })            
+            const filterstatus = await statusdata.filter((statuss, index) => { return statuss.status === status })
             this.setState({
                 vaccumetable: filterstatus
             })
@@ -122,10 +122,10 @@ export default class VacuumTable extends Component {
                                     <option value="Shift C">Shift C</option>
                                 </select>
                                 <select className="form-select mr-1" onChange={e => this.statusfilter(e)}>
-                                <option value="none">Filter By Status</option>
-                                <option value="Complete" >Complete</option>
-                                <option value="In Complete">In Complete</option>                                
-                            </select>
+                                    <option value="none">Filter By Status</option>
+                                    <option value="Complete" >Complete</option>
+                                    <option value="In Complete">In Complete</option>
+                                </select>
                             </div>
                         </div>
                         <Table striped bordered hover size="sm" responsive="sm">
@@ -134,10 +134,11 @@ export default class VacuumTable extends Component {
                                     <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
                                     <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
                                     <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
+                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th>
                                     <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
                                     <th className="tg-54sw text-center " colSpan="18">Status</th>
                                     <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
-                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">status</th>
+                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
                                 </tr>
                                 <tr>
                                     <td className="tg-54sw text-center" colSpan="2">Process1</td>
@@ -151,24 +152,24 @@ export default class VacuumTable extends Component {
                                     <td className="tg-2g1l text-center" colSpan="2">Process9</td>
                                 </tr>
                                 <tr>
-                                    {/* <td className="tg-54sw">Shift</td> */}
-                                    <td className="tg-54sw text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-54sw">Status</td> */}
-                                    <td className="tg-54sw text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-54sw">Status</td> */}
-                                    <td className="tg-54sw text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-54sw">Status</td> */}
-                                    <td className="tg-54sw text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-54sw">Status</td> */}
-                                    <td className="tg-54sw text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-2g1l">Status</td> */}
-                                    <td className="tg-2g1l text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-2g1l">Status</td> */}
-                                    <td className="tg-2g1l text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-2g1l">Status</td> */}
-                                    <td className="tg-2g1l text-center" colSpan="2">Result</td>
-                                    {/* <td className="tg-2g1l">Status</td> */}
-                                    <td className="tg-2g1l text-center" colSpan="2">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -178,25 +179,26 @@ export default class VacuumTable extends Component {
                                             <td className="tg-za14">{vaccume.date}</td>
                                             <td className="tg-za14">{vaccume.shift}</td>
                                             <td className="tg-za14"> {vaccume.machine_Sl_No}</td>
-                                            <td className="tg-za14"> {vaccume.checked_by}</td>
-                                            {/* <td className="tg-9wq8">{vaccume.process1_status} </td> */}
-                                            <td className="tg-za14" colSpan="2">{vaccume.process1_result}</td>
-                                            {/* <td className="tg-9wq8">{vaccume.process2_status} </td> */}
-                                            <td className="tg-za14" colSpan="2">{vaccume.process2_result} </td>
-                                            {/* <td className="tg-9wq8"> {vaccume.process3_status}</td> */}
-                                            <td className="tg-za14" colSpan="2"> {vaccume.process3_result}</td>
-                                            {/* <td className="tg-9wq8">{vaccume.process4_status} </td> */}
-                                            <td className="tg-za14" colSpan="2">{vaccume.process4_result} </td>
-                                            {/* <td className="tg-9wq8">{vaccume.process5_status} </td> */}
-                                            <td className="tg-za14" colSpan="2"> {vaccume.process5_result}</td>
-                                            {/* <td className="tg-nrix">{vaccume.process6_status} </td> */}
-                                            <td className="tg-7zrl" colSpan="2">{vaccume.process6_result} </td>
-                                            {/* <td className="tg-nrix">{vaccume.process7_status} </td> */}
-                                            <td className="tg-7zrl" colSpan="2">{vaccume.process7_result} </td>
-                                            {/* <td className="tg-nrix">{vaccume.process8_status} </td> */}
-                                            <td className="tg-7zrl" colSpan="2">{vaccume.process8_result} </td>
-                                            {/* <td className="tg-nrix">{vaccume.process9_status} </td> */}
-                                            <td className="tg-7zrl" colSpan="2">{vaccume.process9_result} </td>
+                                            <td className="tg-za14"> {vaccume.pressure_guage_value}</td>
+                                            <td className="tg-za14"> {vaccume.checked_by}</td>                                           
+                                            <td className="tg-za14" colSpan="1">{vaccume.process1_time}</td>
+                                            <td className="tg-za14" colSpan="1">{vaccume.process1_result}</td>  
+                                            <td className="tg-za14" colSpan="1">{vaccume.process2_time}</td>                                         
+                                            <td className="tg-za14" colSpan="1">{vaccume.process2_result} </td>  
+                                            <td className="tg-za14" colSpan="1">{vaccume.process3_time}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {vaccume.process3_result}</td>   
+                                            <td className="tg-za14" colSpan="1">{vaccume.process4_time}</td>                                        
+                                            <td className="tg-za14" colSpan="1">{vaccume.process4_result} </td>   
+                                            <td className="tg-za14" colSpan="1">{vaccume.process5_time}</td>                                        
+                                            <td className="tg-za14" colSpan="1"> {vaccume.process5_result}</td> 
+                                            <td className="tg-za14" colSpan="1">{vaccume.process6_time}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{vaccume.process6_result} </td>   
+                                            <td className="tg-za14" colSpan="1">{vaccume.process7_time}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{vaccume.process7_result} </td>  
+                                            <td className="tg-za14" colSpan="1">{vaccume.process8_time}</td>                                        
+                                            <td className="tg-7zrl" colSpan="1">{vaccume.process8_result} </td>   
+                                            <td className="tg-za14" colSpan="1">{vaccume.process9_time}</td>                                       
+                                            <td className="tg-7zrl" colSpan="1">{vaccume.process9_result} </td>
                                             <td className="tg-7zrl">{vaccume.description}</td>
                                             <td className="tg-7zrl">{vaccume.status}</td>
                                         </tr>
